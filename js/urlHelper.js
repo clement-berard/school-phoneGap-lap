@@ -18,7 +18,8 @@ function goPage(url, param) {
             dataUrl: p,
             data: {'parameters': param},
             reloadPage: true,
-            changeHash: true
+            changeHash: true,
+            transition:'slide'
         });
 
     }
@@ -26,7 +27,8 @@ function goPage(url, param) {
         $.mobile.changePage(url, {
             dataUrl: p,
             reloadPage: true,
-            changeHash: true
+            changeHash: true,
+            transition:'slide'
         });
     }
 }
