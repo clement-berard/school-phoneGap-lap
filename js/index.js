@@ -5,6 +5,7 @@
 var app = {
     // Application Constructor
     initialize: function() {
+
         this.bindEvents();
     },
     // Bind Event Listeners
@@ -14,6 +15,11 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
 
+
+        document.body.addEventListener("touchmove", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }, false);
 
         mainConfig.cordova = 0;
 
@@ -26,7 +32,12 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+
         app.receivedEvent('deviceready');
+
+            document.body.style.marginTop = "20px";
+            // OR do whatever layout you need here, to expand a navigation bar etc
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
