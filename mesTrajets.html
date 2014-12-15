@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/urlHelper.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/main-config.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/localhelper.js"></script>
+
+        <title>LAP - La conduite</title>
+    </head>
+    <body>
+        <div id="menu">
+            <h3>Menu</h3>
+            <ul>
+                <li class="active"><a href="#home" class="contentLink">Profil </a></li>
+                <li><a href="myPath.html" class="contentLink">Trajets </a></li>
+                <li><a href="#home" class="contentLink">Nouveau </a></li>
+                <li><a href="#home" class="contentLink">Navigation </a></li>
+            </ul>
+        </div>
+
+        <div data-role="page" id="page-one">
+            <div data-role="header" data-theme="a">
+                <a href="#"class="showMenu">Menu</a>
+                <h1>LAP</h1>
+            </div>
+
+            <div data-role="content">
+                <h2>Présentation</h2>
+                <ul data-role="listview" data-inset="true">
+                    <li>
+                        <li><a href="#page-listeTrajets" data-icon="custom">Mes Trajets</a></li>
+                    </li>
+                </ul>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#one" data-icon="custom">Entry</a></li>
+                        <li><a href="#good" data-icon="custom">Winner</a></li>
+                        <li><a href="#three" data-icon="custom">Gallery</a></li>
+                    </ul>
+                </div><!-- /navbar -->
+            </div>
+
+            <script type="text/javascript">
+                var trajet1 = {
+                    depart: 'Chez michel',
+                    arrivee: 'Chez quentin',
+                    nb_km: 12,
+                    temps: 25,
+                    vitesse_moyenne: 50,
+                    meteo: 'soleil',
+                    type_route: 'campagne',
+                    jour_nuit: 'jour'
+                };
+
+                var trajet2 = {
+                    depart: 'Chez Damien',
+                    arrivee: 'Chez Renaud',
+                    nb_km: 40,
+                    temps: 30,
+                    vitesse_moyenne: 86,
+                    meteo: 'soleil',
+                    type_route: 'campagne',
+                    jour_nuit: 'jour'
+                };
+                Locstor.set('trajet_1', trajet1);
+                Locstor.set('trajet_2', trajet2);
+            </script>
+        </div>
+
+        <div data-role="page" id="page-listeTrajets" >
+            <div data-role="header" data-theme="a">
+                <a href="#"class="showMenu">Menu</a>
+                <h1>Trajets Parcourus</h1>
+            </div>
+
+            <div data-role="content">
+                <h2>Mes trajets</h2>
+                <ul data-role="listview" data-inset="true" id="liste_effectuees">
+
+
+                </ul>
+            </div>
+
+            <script>
+                var a = Locstor.list('trajet_');
+                $.each(a, function (i) {
+                    var monTrajet = Locstor.get(a[i]);
+                    var liste_trajets = $('#liste_effectuees');
+                    liste_trajets.append('<li>De '+monTrajet.depart+' vers '+monTrajet.arrivee+'</li>')
+
+                });
+            </script>
+        </div>
+        <script type="text/javascript">
+            // pour initialiser l'app
+            app.initialize();
+        </script>
+    </body>
+</html>
