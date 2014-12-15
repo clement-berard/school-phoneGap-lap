@@ -2,6 +2,8 @@
  * Locstor.js is a JavaScript helper library for HTML5 localStorage.
  *
  * @author BERARD
+ *
+ * https://github.com/justindeguzman/locstor
  */
 
 (function () {

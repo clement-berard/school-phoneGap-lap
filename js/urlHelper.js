@@ -12,14 +12,15 @@ $('.goPage').on('click', function () {
  * @param param
  */
 function goPage(url, param) {
-    var p = (param != null) ? url + "?parameters=" + param : url;
+    //var p = (param != null) ? url + "?parameters=" + param : url;
     if (param != null) {
         $.mobile.changePage(url, {
-            dataUrl: p,
+            dataUrl: url,
             data: {'parameters': param},
             reloadPage: true,
             changeHash: true,
-            transition:'slide'
+            transition:'slide',
+            rel:'external'
         });
 
     }
@@ -28,7 +29,8 @@ function goPage(url, param) {
             dataUrl: p,
             reloadPage: true,
             changeHash: true,
-            transition:'slide'
+            transition:'slide',
+            rel:'external'
         });
     }
 }

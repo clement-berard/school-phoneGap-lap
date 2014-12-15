@@ -113,3 +113,17 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+#ios7statusbar
+{
+    width:100%;
+    height:20px;
+    background-color:white;
+    position:fixed;
+    z-index:100;
+}
+
+.ios7 .ui-page
+{
+    margin-top: 20px;
+}
