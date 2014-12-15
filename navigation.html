@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
+        <title>LAP - La conduite</title>
+    </head>
+    <body>
+    <div id="menu">
+    <h3>Menu</h3>
+    <ul>
+        <li class="active"><a href="#home" class="contentLink">Profil </a></li>
+        <li><a href="#home" class="contentLink">Trajets </a></li>
+        <li><a href="#home" class="contentLink">Nouveau </a></li>
+        <li><a href="#home" class="contentLink">Navigation </a></li>
+    </ul>
+</div>
+    <div data-role="page" id="navigation_page_id">
+        <div data-role="header" data-theme="a">
+        <a href="#"class="showMenu">Menu</a>
+            <h1>LAP</h1>
+        </div>
+        <div data-role="content">
+            <form class="form-horizontal" role="form" id="form_itinerary">
+                <div class="form-group">
+                    <label for="fname">Départ:</label>
+                    <input type="text" name="fname" id="fdepart">
+                </div>
+                <div class="form-group" id="appendable">
+                    <label for="fname" >Arrivée:</label>
+                    <input type="text" name="fname" id="farrivee">
+                </div>
+            </form>
+            <button class="ui-btn" onclick="addRow()" >Button</button>
+        </div>
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#one" data-icon="custom">Entry</a></li>
+                    <li><a href="#good" data-icon="custom">Winner</a></li>
+                    <li><a href="#three" data-icon="custom">Gallery</a></li>
+                </ul>
+            </div><!-- /navbar -->
+        </div>
+    </div>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/localhelper.js"></script>
+        <script type="text/javascript" src="js/urlHelper.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/main-config.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript">
+
+            // pour initialiser l'app
+            app.initialize();
+
+            
+            function SayHello(){
+                alert('hello');
+                /*$(').insertBefore( "#farrivee" );*/
+            }
+
+            var rowNum = 0;
+            function addRow() {
+                rowNum ++;
+                var row =  '<div class="form-group" id="removable'+rowNum+'"><label for="fname">Etape  :</label><input type="text" name="fname" id="etape'+rowNum+'" class="appendedStep"><input type="button" value="Remove" onclick="removeRow('+rowNum+')"></div>';
+
+                //jQuery('#itemRows').insertBefore(row);
+                $(row).insertBefore( "#appendable" );
+            }
+
+            function removeRow(rnum) {
+                $('#removable'+rnum).remove();
+            }
+        </script>
+    </body>
+</html>
+
+
+
