@@ -1,0 +1,32 @@
+<div data-role="page" id="page-two">
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <div data-role="header" data-theme="a">
+    <a href="#"
+      class="ui-btn ui-icon-arrow-l ui-btn-icon-notext ui-corner-all"
+      onclick="goBack();">No text</a>
+    <h1>Navigation Manuelle</h1>
+  </div>
+  <div data-role="content" onload="init();">
+    <div id="googleMap" style="width: 500px; height: 380px;"></div>
+    <div>
+      <table>
+        <tr>
+          <td><b>Adresse: </b></td>
+          <td><input type="text" id="adr" value="" style="width: 300px;"></td>
+          <td><input type="button" value="recherche"
+            onclick="rechercher('adr')"></td>
+        </tr>
+        <tr>
+          <td><input type="button" value="itineraire"
+            onclick="trouveRoute()"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="divMap" style="float: left; width: 70%; height: 80%"></div>
+  </div>
+  <div data-role="footer" data-theme="c">
+    <h1>Footer title</h1>
+  </div>
+</div>
+  <script>
+  </script>
