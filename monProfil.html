@@ -75,6 +75,17 @@
                     Locstor.set('monProfil', monProfil);
                     $( "#popupBasic" ).popup( "open" );
                 };
+
+                $(document).on('pagebeforeshow', '#page-testTrajet', function (e, data) {
+                    if (Locstor.contains('monProfil')) {
+                        var monProfil = Locstor.get('monProfil');
+
+                        document.getElementById("text-prenom").value = monProfil.prenom;
+                        nom: document.getElementById("text-nom").value = monProfil.nom;
+                        distanceTotale: document.getElementById("number-distance").value = monProfil.distanceTotale;
+                    }
+                });
             </script>
         </div>
     </body>
+</html>
