@@ -35,50 +35,7 @@
             </ul>
         </div>
 
-        <div data-role="page" id="page-testTrajet">
-            <div data-role="header" data-theme="a">
-                <a href="#"class="showMenu">Menu</a>
-                <h1>Mes Trajets</h1>
-            </div>
 
-            <div data-role="content">
-                <h2>Test trajets</h2>
-                <ul data-role="listview" data-inset="true">
-                    <li><a href="#page-listeTrajets" data-icon="custom">Mes Trajets</a></li>
-                </ul>
-            </div>
-
-            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-
-            </div>
-
-            <script type="text/javascript">
-                var trajet1 = new trajet("manuel");
-                trajet1.setTitre("Trajet 1");
-                trajet1.setDepart(20,30);
-                trajet1.setArrivee(50,60);
-                trajet1.setDistanceTotale(17);
-                trajet1.setTempsTotal(25);
-                trajet1.setVitesseMoyenne(75);
-                trajet1.setMeteo("Ensoleillé");
-                trajet1.setTypeRoute("Campagne");
-                trajet1.setPeriode("Jour");
-
-                var trajet2 = new trajet("manuel");
-                trajet2.setTitre("Trajet 2");
-                trajet2.setDepart(20,30);
-                trajet2.setArrivee(50,60);
-                trajet2.setDistanceTotale(40);
-                trajet2.setTempsTotal(60);
-                trajet2.setVitesseMoyenne(82);
-                trajet2.setMeteo("Ensoleillé");
-                trajet2.setTypeRoute("Campagne");
-                trajet2.setPeriode("Jour");
-
-                trajet1.save();
-                trajet2.save();
-            </script>
-        </div>
 
         <div data-role="page" id="page-listeTrajets" >
             <div data-role="header" data-theme="a">
