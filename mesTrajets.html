@@ -27,36 +27,28 @@
         <div id="menu">
             <h3>Menu</h3>
             <ul>
-                <li class="active"><a href="#home" class="contentLink">Profil </a></li>
-                <li><a href="myPath.html" class="contentLink">Trajets </a></li>
+                <li class="active"><a href="monProfil.html" class="contentLink">Profil </a></li>
+                <li><a href="mesTrajets.html" class="contentLink">Trajets </a></li>
                 <li><a href="#home" class="contentLink">Nouveau </a></li>
                 <li><a href="#home" class="contentLink">Navigation </a></li>
             </ul>
         </div>
 
-        <div data-role="page" id="page-one">
+        <div data-role="page" id="page-testTrajet">
             <div data-role="header" data-theme="a">
                 <a href="#"class="showMenu">Menu</a>
-                <h1>LAP</h1>
+                <h1>Mes Trajets</h1>
             </div>
 
             <div data-role="content">
-                <h2>Présentation</h2>
+                <h2>Test trajets</h2>
                 <ul data-role="listview" data-inset="true">
-                    <li>
-                        <li><a href="#page-listeTrajets" data-icon="custom">Mes Trajets</a></li>
-                    </li>
+                    <li><a href="#page-listeTrajets" data-icon="custom">Mes Trajets</a></li>
                 </ul>
             </div>
 
             <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-                <div data-role="navbar">
-                    <ul>
-                        <li><a href="#one" data-icon="custom">Entry</a></li>
-                        <li><a href="#good" data-icon="custom">Winner</a></li>
-                        <li><a href="#three" data-icon="custom">Gallery</a></li>
-                    </ul>
-                </div><!-- /navbar -->
+
             </div>
 
             <script type="text/javascript">
@@ -94,10 +86,7 @@
 
             <div data-role="content">
                 <h2>Mes trajets</h2>
-                <ul data-role="listview" data-inset="true" id="liste_effectuees">
-
-
-                </ul>
+                <ul data-role="listview" data-inset="true" id="liste_effectuees"></ul>
             </div>
 
             <script>
@@ -105,11 +94,83 @@
                 $.each(a, function (i) {
                     var monTrajet = Locstor.get(a[i]);
                     var liste_trajets = $('#liste_effectuees');
-                    liste_trajets.append('<li>De '+monTrajet.depart+' vers '+monTrajet.arrivee+'</li>')
+                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">De '+monTrajet.depart+' vers '+monTrajet.arrivee+'</a></li>')
 
+                });
+
+                $('ul').children('li').on('click', function () {
+                    Locstor.set('courant_trajet', $(this).attr('data-name'));
                 });
             </script>
         </div>
+
+        <div data-role="page" id="page-detailsTrajet" >
+            <div data-role="header" data-theme="a">
+                <a href="#"class="showMenu">Menu</a>
+                <h1>Détails de mon trajet</h1>
+            </div>
+
+            <div data-role="content">
+                <h2>Details</h2>
+
+                <table>
+                    <tr>
+                        <td>Départ</td>
+                        <td id="text-depart"></td>
+                    </tr>
+
+                    <tr>
+                       <td>Arrivée</td>
+                        <td id="text-arrivee"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Distance</td>
+                        <td id="text-km"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Temps</td>
+                        <td id="text-temps"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Vitesse moyenne</td>
+                        <td id="text-vitesse"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Météo</td>
+                        <td id="text-meteo"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Type de route</td>
+                        <td id="text-route"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Période</td>
+                        <td id="text-periode"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <script type="text/javascript">
+                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {
+                    var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
+                    $('#text-depart').html(monTrajet.depart);
+                    $('#text-arrivee').html(monTrajet.arrivee);
+                    $('#text-km').html(monTrajet.nb_km+' km');
+                    $('#text-temps').html(monTrajet.temps+' min');
+                    $('#text-vitesse').html(monTrajet.vitesse_moyenne+' km/h');
+                    $('#text-meteo').html(monTrajet.meteo);
+                    $('#text-route').html(monTrajet.type_route);
+                    $('#text-periode').html(monTrajet.jour_nuit);
+                });
+            </script>
+        </div>
+
         <script type="text/javascript">
             // pour initialiser l'app
             app.initialize();
