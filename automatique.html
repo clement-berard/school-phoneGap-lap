@@ -55,7 +55,7 @@
             var lancementTimer = 0;
             var affSecondes = "";
             var affMinutes = "";
-            var affheures = "";
+            var affHeures = "";
 
             $( "#btnStart" ).on('click',function(){
                 var btnValue = $(this).html();
@@ -82,6 +82,7 @@
                         minutes = 0;
                         heures = heures +1;
                     }
+                    //Gestion de l'affichage avec "0"
                     if(secondes < 10) {
                         affSecondes = "0" + secondes;
                     } else {
@@ -92,10 +93,16 @@
                     } else {
                         affMinutes = minutes;
                     }
+                    if(heures < 10) {
+                        affHeures = "0" + heures;
+                    } else {
+                        affHeures = heures;
+                    }
 
-                    document.getElementById("timer").innerHTML = heures + ":" + affMinutes+ ":" + affSecondes ;
+                    document.getElementById("timer").innerHTML = affHeures + ":" + affMinutes+ ":" + affSecondes ;
                 } else {
-                    //Remettre timer à 0
+                    //Remettre timer à 0 après avoir sauvegardé le temps du trajet
+                    //document.getElementById("timer").innerHTML = affHeures + ":" + affMinutes+ ":" + affSecondes ;
                 }
             }
         </script>
