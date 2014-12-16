@@ -35,7 +35,7 @@ function myTimer(id) {
 
 
 function error_callback() {
-    alert('Error');
+    alert('Erreur de la fonction location');
 }
 
 
