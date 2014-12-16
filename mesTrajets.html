@@ -87,6 +87,12 @@
             <div data-role="content">
                 <h2>Mes trajets</h2>
                 <ul data-role="listview" data-inset="true" id="liste_effectuees"></ul>
+
+                <form>
+                    <label for="slider-distance">Distance totale parcourue :</label>
+                    <p name="text-distance" id="text-distance"></p>
+                    <input type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
+                </form>
             </div>
 
             <script>
@@ -100,6 +106,27 @@
 
                 $('ul').children('li').on('click', function () {
                     Locstor.set('courant_trajet', $(this).attr('data-name'));
+                });
+
+                $(document).on('pagebeforeshow', '#page-listeTrajets', function (e, data) {
+                    var monProfil = Locstor.get('monProfil');
+                    var valeur = 0;
+
+                    var a = Locstor.list('trajet_');
+                    $.each(a, function (i) {
+                        var trajet = Locstor.get(a[i]);
+                        valeur = valeur + trajet.nb_km;
+                    });
+
+
+                    $('#slider-distance').val(valeur);
+                    $("#slider-distance").attr("max", monProfil.distanceTotale);
+                    $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+valeur*100/monProfil.distanceTotale+" %)");
+                    $('#slider-distance').slider("refresh");
+                    
+                    $("input").remove();
+                    $(".ui-slider-handle").remove();
+                    $('.ui-slider-track').css('margin','0 0 0 0').css('pointer-events','none');
                 });
             </script>
         </div>
