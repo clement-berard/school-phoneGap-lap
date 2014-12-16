@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
 
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/menu.css" />
-        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
-        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
-        <title>LAP - Navigation automatique</title>
-    </head>
-    <body>
-    <div id="menu">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css"/>
+    <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css"/>
+    <title>LAP - Navigation automatique</title>
+</head>
+<body>
+<div id="menu">
     <h3>Menu</h3>
     <ul>
                 <li class="active"><a href="nouveau_trajet.html" class="contentLink" rel="external">Nouveau </a></li>
@@ -24,135 +25,122 @@
         <li><a href="monProfil.html" class="contentLink" rel="external">Profil </a></li>
     </ul>
 </div>
-    <div data-role="page" id="page-automatique">
-        <div data-role="header" data-theme="a">
-        <a href="#"class="showMenu">Menu</a>
-            <h1>Mode automatique</h1>
-        </div>
-        <div data-role="content">
-            <button id="btnStart">Démarrer la conduite
-            </button>
-        </div>
-        <div data-role="footer" data-position="fixed" data-tap-toggle="false">
-            <!-- footer -->
-        </div>
+<div data-role="page" id="page-automatique">
+    <div data-role="header" data-theme="a">
+        <a href="#" class="showMenu">Menu</a>
+
+        <h1>Mode automatique</h1>
     </div>
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/localhelper.js"></script>
-        <script type="text/javascript" src="js/urlHelper.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/main-config.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
-        <script type="text/javascript" src="js/fonctionMap.js"></script>
-        <script type="text/javascript" src="js/trajet.js"></script>
-        <script type="text/javascript">
+    <div data-role="content">
+        <button id="btnStart" class="start">Démarrer la conduite</button>
+    </div>
+    <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+        <!-- footer -->
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/localhelper.js"></script>
+<script type="text/javascript" src="js/urlHelper.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/main-config.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/fonctionMap.js"></script>
+<script type="text/javascript" src="js/trajet.js"></script>
+<script type="text/javascript" src="js/tools.js"></script>
+<script type="text/javascript">
+
+    // creation d'un trajet
+
+    var trajet = new trajet('automatique');
 
 
-            var trajet  = new trajet('automatique');
+    var secondes = 0;
+    var minutes = 0;
+    var heures = 0;
+    var lancementTimer = 0;
+    var affSecondes = "";
+    var affMinutes = "";
+    var affHeures = "";
+
+    $("#btnStart").on('click', function () {
+
+
+        // qudn on met start
+        if ($(this).hasClass('start')) {
+            $(this).removeClass('start').addClass('stop');
+            lancementTimer = 1;
+            $(this).html("Arrêter la conduite \<div id=\"timer\"> 00:00:00</div>");
+        }
+        else if ($(this).hasClass('stop')) { // si on met stop
+            $(this).removeClass('stop').addClass('start');
+            lancementTimer = 0;
+            $(this).html(('Démarrer la conduite \<div id=\"timer\"> 00:00:00</div>'));
+            // le temps total
 
 
 
-            var secondes = 0;
-            var minutes = 0;
-            var heures = 0;
-            var lancementTimer = 0;
-            var affSecondes = "";
-            var affMinutes = "";
-            var affHeures = "";
+//            var fm = new fonctionMap('toto').init();
+//            var coo1 = fm.getGoogleLocation('45.7842219','4.8688555');
+//            var coo2 = fm.getGoogleLocation('45.1103841','5.66511909999997');
+//
+//            var d = google.maps.geometry.spherical.computeDistanceBetween (coo1, coo2);
+//
+//    alert(d);
 
-            $( "#btnStart" ).on('click',function(){
+            trajet.setTempsTotal(heures * 60 + minutes);
+            trajet.save();
+        }
 
+        // on veux savoir ou on est pour le depart
+        runCurrentLocation('depart');
 
-                // creation d'un trajet
-
-                // on veux savoir ou on est pour le depart
-                runCurrentLocation();
-
-
-
-
-                var btnValue = $(this).html();
-
-                if(btnValue.indexOf("Démarrer") >= 0) {
-                    lancementTimer = 1;
-                    $(this).html("Arrêter la conduite \<div id=\"timer\"> 00:00:00</div>");
-                } else {
-                    lancementTimer = 0;
-                    $(this).html(('Démarrer la conduite \<div id=\"timer\"> 00:00:00</div>'))
-                }
-            });
+    });
 
 
+    function runCurrentLocation(type) {
+        if (navigator.geolocation) {
+            // btn_my_position.html('Search for your location...');
 
-
-            function runCurrentLocation() {
-                if (navigator.geolocation) {
-                    // btn_my_position.html('Search for your location...');
-                    navigator.geolocation.getCurrentPosition(callForLocation, error);
-                } else {
-                    error('not supported');
-                }
+            switch (type) {
+                case 'depart':
+                    navigator.geolocation.getCurrentPosition(callForLocationDepart, error_callback);
+                    break;
+                case 'update':
+                    navigator.geolocation.getCurrentPosition(callForLocationUpdate, error_callback);
+                    break;
             }
 
-            function callForLocation(position) {
-                lat = position.coords.latitude;
-                lnng = position.coords.longitude;
-                var center = new google.maps.LatLng(lat, lnng);
-                trajet.setDepart(lat,lnng);
+        } else {
+            error('not supported');
+        }
+    }
+    // pour le depart
+    function callForLocationDepart(position) {
+        lat = position.coords.latitude;
+        lnng = position.coords.longitude;
+        var center = new google.maps.LatLng(lat, lnng);
+        trajet.setDepart(lat, lnng);
+    }
+    // pour les etapes
+    function callForLocationUpdate(position) {
+        lat = position.coords.latitude;
+        lnng = position.coords.longitude;
+        var center = new google.maps.LatLng(lat, lnng);
+        trajet.setEtape(lat, lnng);
+    }
 
-                trajet.save();
-  
-            }
 
-            function error() {
-                alert('Error');
-            }
-
-
+    setInterval(function () {
+        myTimer('timer')
+    }, 1000); // Appel toutes les secondes
+    setInterval(function () {
+        runCurrentLocation('update')
+    }, 10000); // Appel toutes les 10 secondes
 
 
-
-
-            setInterval(function () {myTimer()}, 1000); // Appel toutes les secondes
-            // setInterval(function () {updateTrajet()}, 1000); // Appel toutes les secondes
-
-            function myTimer() {
-                if(lancementTimer == 1) {
-                    secondes = secondes + 1;
-                    if(secondes == 60) {
-                        secondes = 0;
-                        minutes = minutes +1;
-                    }
-                    if(minutes == 60) {
-                        minutes = 0;
-                        heures = heures +1;
-                    }
-                    //Gestion de l'affichage avec "0"
-                    if(secondes < 10) {
-                        affSecondes = "0" + secondes;
-                    } else {
-                        affSecondes = secondes;
-                    }
-                    if(minutes < 10) {
-                        affMinutes = "0" +minutes;
-                    } else {
-                        affMinutes = minutes;
-                    }
-                    if(heures < 10) {
-                        affHeures = "0" + heures;
-                    } else {
-                        affHeures = heures;
-                    }
-
-                    document.getElementById("timer").innerHTML = affHeures + ":" + affMinutes+ ":" + affSecondes ;
-                } else {
-                    //Remettre timer à 0 après avoir sauvegardé le temps du trajet
-                    //document.getElementById("timer").innerHTML = affHeures + ":" + affMinutes+ ":" + affSecondes ;
-                }
-            }
-        </script>
-    </body>
+</script>
+</body>
 </html>

@@ -4,13 +4,8 @@ function fonctionMap(myMapId) {
 
     this.mymapid  =  myMapId,
     this.Mymap = null,
-    markers = {},
+    this.markers = {},
 
-
-    this.test = function(){
-
-        alert('test');
-    },
 
 
     this.init = function() {
