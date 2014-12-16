@@ -27,7 +27,7 @@
         <div id="menu">
             <h3>Menu</h3>
             <ul>
-                <li class="active"><a href="#home" class="contentLink">Profil </a></li>
+                <li class="active"><a href="monProfil.html" class="contentLink">Profil </a></li>
                 <li><a href="mesTrajets.html" class="contentLink">Trajets </a></li>
                 <li><a href="#home" class="contentLink">Nouveau </a></li>
                 <li><a href="#home" class="contentLink">Navigation </a></li>
@@ -125,7 +125,7 @@
                     </tr>
 
                     <tr>
-                        <td>Nombre de kilomètre</td>
+                        <td>Distance</td>
                         <td id="text-km"></td>
                     </tr>
 
@@ -161,9 +161,9 @@
                     var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
                     $('#text-depart').html(monTrajet.depart);
                     $('#text-arrivee').html(monTrajet.arrivee);
-                    $('#text-km').html(monTrajet.nb_km);
-                    $('#text-temps').html(monTrajet.temps);
-                    $('#text-vitesse').html(monTrajet.vitesse_moyenne);
+                    $('#text-km').html(monTrajet.nb_km+' km');
+                    $('#text-temps').html(monTrajet.temps+' min');
+                    $('#text-vitesse').html(monTrajet.vitesse_moyenne+' km/h');
                     $('#text-meteo').html(monTrajet.meteo);
                     $('#text-route').html(monTrajet.type_route);
                     $('#text-periode').html(monTrajet.jour_nuit);

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/menu.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
+
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/urlHelper.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/main-config.js"></script>
+        <script type="text/javascript" src="js/menu.js"></script>
+        <script type="text/javascript" src="js/localhelper.js"></script>
+
+        <title>LAP - La conduite</title>
+    </head>
+    <body>
+        <div id="menu">
+            <h3>Menu</h3>
+            <ul>
+                <li class="active"><a href="monProfil.html" class="contentLink">Profil </a></li>
+                <li><a href="mesTrajets.html" class="contentLink">Trajets </a></li>
+                <li><a href="#home" class="contentLink">Nouveau </a></li>
+                <li><a href="#home" class="contentLink">Navigation </a></li>
+            </ul>
+        </div>
+
+        <div data-role="page" id="page-testTrajet">
+            <div data-role="header" data-theme="a">
+                <a href="#"class="showMenu">Menu</a>
+                <h1>Paramètres</h1>
+            </div>
+
+            <div data-role="content">
+                <h2>Mon Profil</h2>
+
+                <form>
+                    <label for="text-prenom">Prénom</label>
+                    <input type="text" data-clear-btn="true" name="text-prenom" id="text-prenom" value="" placeholder="Prénom">
+
+                    <label for="text-nom">Nom</label>
+                    <input type="text" data-clear-btn="true" name="text-nom" id="text-nom" value="" placeholder="Nom">
+
+                    <label for="number-distance">Distance totale</label>
+                    <input type="number" data-clear-btn="true" name="number-distance" id="number-distance" placeholder="Distance totale à parcourir">
+
+                    <a id="letsdone" href="#" data-role="button" onclick="enregisterProfil();">Enregistrer</a>
+                    <div data-role="popup" id="popupBasic">
+                        <p>Profil enregistré !<p>
+                    </div>
+                </form>
+            </div>
+
+            <div data-role="footer" data-position="fixed" data-tap-toggle="false">
+
+            </div>
+
+            <script type="text/javascript">
+                function enregisterProfil(){
+                    var monProfil = {
+                        prenom: document.getElementById("text-prenom").value,
+                        nom: document.getElementById("text-nom").value,
+                        distanceTotale: document.getElementById("number-distance").value
+                    };
+
+                    Locstor.set('monProfil', monProfil);
+                    $( "#popupBasic" ).popup( "open" );
+                };
+            </script>
+        </div>
+    </body>
