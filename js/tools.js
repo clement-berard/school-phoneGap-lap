@@ -42,21 +42,19 @@ function error_callback() {
 getTotalKilometers = function (tab) {
     var taille = Object.keys(tab).length;
     var distance = 0;
-    for(var i=0; i < taille ; i++){
-        if(taille == 1)
+    for (var i = 0; i < taille; i++) {
+        if (taille == 1)
             return distance;
-        else{
-            if((i+1)<taille){
-                var coo1 = new google.maps.LatLng(tab[i].lat,tab[i].lng);
-                var coo2 = new google.maps.LatLng(tab[i+1].lat,tab[i+1].lng);
+        else {
+            if ((i + 1) < taille) {
+                var coo1 = new google.maps.LatLng(tab[i].lat, tab[i].lng);
+                var coo2 = new google.maps.LatLng(tab[i + 1].lat, tab[i + 1].lng);
                 distance = distance + google.maps.geometry.spherical.computeDistanceBetween(coo1, coo2);
             }
         }
     }
 
 
-
-
-    return distance
+    return distance / 1000;
 
 }
