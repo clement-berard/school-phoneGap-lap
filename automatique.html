@@ -27,10 +27,11 @@
     <div data-role="page" id="page-automatique">
         <div data-role="header" data-theme="a">
         <a href="#"class="showMenu">Menu</a>
-            <h1>LAP</h1>
+            <h1>Mode automatique</h1>
         </div>
         <div data-role="content">
-            <div id="auto_map_div" style="width:1000px;height:500px"></div>
+            <button id="btnStart">Démarrer la conduite
+            </button>
         </div>
         <div data-role="footer" data-position="fixed" data-tap-toggle="false">
             <!-- footer -->
@@ -48,16 +49,55 @@
         <script type="text/javascript" src="js/fonctionMap.js"></script>
         <script type="text/javascript">
 
-            // pour initialiser l'app
-            app.initialize();
+            var secondes = 0;
+            var minutes = 0;
+            var heures = 0;
+            var lancementTimer = 0;
+            var affSecondes = "";
+            var affMinutes = "";
+            var affheures = "";
 
+            $( "#btnStart" ).on('click',function(){
+                var btnValue = $(this).html();
 
-            myMap = new fonctionMap('auto_map_div').init();
-            myMap.addMarker('toto',myMap.getGoogleLocation('45.885379','4.247927'),'my content');
+                if(btnValue.indexOf("Démarrer") >= 0) {
+                    lancementTimer = 1;
+                    $(this).html("Arrêter la conduite \<div id=\"timer\"> 00:00:00</div>");
+                } else {
+                    lancementTimer = 0;
+                    $(this).html(('Démarrer la conduite \<div id=\"timer\"> 00:00:00</div>'))
+                }
+            });
 
+            setInterval(function () {myTimer()}, 1000); // Appel toutes les secondes
 
+            function myTimer() {
+                if(lancementTimer == 1) {
+                    secondes = secondes + 1;
+                    if(secondes == 60) {
+                        secondes = 0;
+                        minutes = minutes +1;
+                    }
+                    if(minutes == 60) {
+                        minutes = 0;
+                        heures = heures +1;
+                    }
+                    if(secondes < 10) {
+                        affSecondes = "0" + secondes;
+                    } else {
+                        affSecondes = secondes;
+                    }
+                    if(minutes < 10) {
+                        affMinutes = "0" +minutes;
+                    } else {
+                        affMinutes = minutes;
+                    }
 
-
+                    document.getElementById("timer").innerHTML = heures + ":" + affMinutes+ ":" + affSecondes ;
+                } else {
+                    //Remettre timer à 0
+                }
+            }
         </script>
     </body>
 </html>
