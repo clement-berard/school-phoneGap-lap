@@ -18,6 +18,17 @@ function fonctionMap(myMapId) {
         return this.Mymap;
     },
 
+    this.getMarker = function (key) {
+            return this.markers[key];
+        },
+
+    this.getMarkers = function () {
+            return this.markers;
+        },
+
+    this.getSize = function(){
+        return this.markers.length;
+    }    
 
     this.createMap = function() {
         init_latlng = this.getGoogleLocation('45.885379', '4.247927');
@@ -32,6 +43,11 @@ function fonctionMap(myMapId) {
 
     },
 
+    this.uniqid = function () {
+            var n = Math.floor(Math.random() * 11);
+            var k = Math.floor(Math.random() * 1000000);
+            return k;
+        },
 
     this.moveToLocation = function(map,lat, lng) {
             var center = new google.maps.LatLng(lat, lng);
@@ -50,7 +66,7 @@ function fonctionMap(myMapId) {
             position: loc,
             map: this.Mymap
         });
-        markers.name = m;
+        this.markers.name = m;
 
         if (content != null) {
             var c = new google.maps.InfoWindow({
