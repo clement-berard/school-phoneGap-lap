@@ -47,7 +47,13 @@
         <script type="text/javascript" src="js/main-config.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
         <script type="text/javascript" src="js/fonctionMap.js"></script>
+        <script type="text/javascript" src="js/trajet.js"></script>
         <script type="text/javascript">
+
+
+            var trajet  = new trajet('automatique');
+
+
 
             var secondes = 0;
             var minutes = 0;
@@ -58,6 +64,16 @@
             var affHeures = "";
 
             $( "#btnStart" ).on('click',function(){
+
+
+                // creation d'un trajet
+
+                // on veux savoir ou on est pour le depart
+                runCurrentLocation();
+
+
+
+
                 var btnValue = $(this).html();
 
                 if(btnValue.indexOf("Démarrer") >= 0) {
@@ -69,7 +85,39 @@
                 }
             });
 
+
+
+
+            function runCurrentLocation() {
+                if (navigator.geolocation) {
+                    // btn_my_position.html('Search for your location...');
+                    navigator.geolocation.getCurrentPosition(callForLocation, error);
+                } else {
+                    error('not supported');
+                }
+            }
+
+            function callForLocation(position) {
+                lat = position.coords.latitude;
+                lnng = position.coords.longitude;
+                var center = new google.maps.LatLng(lat, lnng);
+                trajet.setDepart(lat,lnng);
+
+                trajet.save();
+  
+            }
+
+            function error() {
+                alert('Error');
+            }
+
+
+
+
+
+
             setInterval(function () {myTimer()}, 1000); // Appel toutes les secondes
+            // setInterval(function () {updateTrajet()}, 1000); // Appel toutes les secondes
 
             function myTimer() {
                 if(lancementTimer == 1) {
