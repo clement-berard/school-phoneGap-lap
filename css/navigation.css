@@ -1,0 +1,16 @@
+#nav_map {
+	position:absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#img_position {
+	background-image: url(../crosshair4.png);
+	position: absolute;
+	height: 32px;
+	width: 32px;
+	left: 50%;
+	top: 50%;
+}
