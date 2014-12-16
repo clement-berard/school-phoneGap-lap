@@ -113,42 +113,60 @@
             <div data-role="content">
                 <h2>Details</h2>
 
-                <label for="text-depart">Départ :</label>
-                <input type="text" disabled="disabled" name="text-depart" id="text-depart" value="">
+                <table>
+                    <tr>
+                        <td>Départ</td>
+                        <td id="text-depart"></td>
+                    </tr>
 
-                <label for="text-arrivee">Arrivée :</label>
-                <input type="text" disabled="disabled" name="text-arrivee" id="text-arrivee" value="">
+                    <tr>
+                       <td>Arrivée</td>
+                        <td id="text-arrivee"></td>
+                    </tr>
 
-                <label for="text-km">Nombre de kilomètre :</label>
-                <input type="text" disabled="disabled" name="text-km" id="text-km" value="">
+                    <tr>
+                        <td>Nombre de kilomètre</td>
+                        <td id="text-km"></td>
+                    </tr>
 
-                <label for="text-temps">Temps :</label>
-                <input type="text" disabled="disabled" name="text-temps" id="text-temps" value="">
+                    <tr>
+                        <td>Temps</td>
+                        <td id="text-temps"></td>
+                    </tr>
 
-                <label for="text-vitesse">Vitesse moyenne :</label>
-                <input type="text" disabled="disabled" name="text-vitesse" id="text-vitesse" value="">
+                    <tr>
+                        <td>Vitesse moyenne</td>
+                        <td id="text-vitesse"></td>
+                    </tr>
 
-                <label for="text-meteo">Météo :</label>
-                <input type="text" disabled="disabled" name="text-meteo" id="text-meteo" value="">
+                    <tr>
+                        <td>Météo</td>
+                        <td id="text-meteo"></td>
+                    </tr>
 
-                <label for="text-route">Type de route :</label>
-                <input type="text" disabled="disabled" name="text-route" id="text-route" value="">
+                    <tr>
+                        <td>Type de route</td>
+                        <td id="text-route"></td>
+                    </tr>
 
-                <label for="text-periode">Période :</label>
-                <input type="text" disabled="disabled" name="text-periode" id="text-periode" value="">
+                    <tr>
+                        <td>Période</td>
+                        <td id="text-periode"></td>
+                    </tr>
+                </table>
             </div>
 
             <script type="text/javascript">
                 $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {
                     var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
-                    $('#text-depart').val(monTrajet.depart);
-                    $('#text-arrivee').val(monTrajet.arrivee);
-                    $('#text-km').val(monTrajet.nb_km);
-                    $('#text-temps').val(monTrajet.temps);
-                    $('#text-vitesse').val(monTrajet.vitesse_moyenne);
-                    $('#text-meteo').val(monTrajet.meteo);
-                    $('#text-route').val(monTrajet.type_route);
-                    $('#text-periode').val(monTrajet.jour_nuit);
+                    $('#text-depart').html(monTrajet.depart);
+                    $('#text-arrivee').html(monTrajet.arrivee);
+                    $('#text-km').html(monTrajet.nb_km);
+                    $('#text-temps').html(monTrajet.temps);
+                    $('#text-vitesse').html(monTrajet.vitesse_moyenne);
+                    $('#text-meteo').html(monTrajet.meteo);
+                    $('#text-route').html(monTrajet.type_route);
+                    $('#text-periode').html(monTrajet.jour_nuit);
                 });
             </script>
         </div>
