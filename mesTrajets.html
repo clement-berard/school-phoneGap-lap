@@ -20,6 +20,7 @@
         <script type="text/javascript" src="js/main-config.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
         <script type="text/javascript" src="js/localhelper.js"></script>
+        <script type="text/javascript" src="js/trajet.js"></script>
 
         <title>LAP - La conduite</title>
     </head>
@@ -52,29 +53,30 @@
             </div>
 
             <script type="text/javascript">
-                var trajet1 = {
-                    depart: 'Chez michel',
-                    arrivee: 'Chez quentin',
-                    nb_km: 12,
-                    temps: 25,
-                    vitesse_moyenne: 50,
-                    meteo: 'soleil',
-                    type_route: 'campagne',
-                    jour_nuit: 'jour'
-                };
+                var trajet1 = new trajet("manuel");
+                trajet1.setTitre("Trajet 1");
+                trajet1.setDepart(20,30);
+                trajet1.setArrivee(50,60);
+                trajet1.setDistanceTotale(17);
+                trajet1.setTempsTotal(25);
+                trajet1.setVitesseMoyenne(75);
+                trajet1.setMeteo("Ensoleillé");
+                trajet1.setTypeRoute("Campagne");
+                trajet1.setPeriode("Jour");
 
-                var trajet2 = {
-                    depart: 'Chez Damien',
-                    arrivee: 'Chez Renaud',
-                    nb_km: 40,
-                    temps: 30,
-                    vitesse_moyenne: 86,
-                    meteo: 'soleil',
-                    type_route: 'campagne',
-                    jour_nuit: 'jour'
-                };
-                Locstor.set('trajet_1', trajet1);
-                Locstor.set('trajet_2', trajet2);
+                var trajet2 = new trajet("manuel");
+                trajet2.setTitre("Trajet 2");
+                trajet2.setDepart(20,30);
+                trajet2.setArrivee(50,60);
+                trajet2.setDistanceTotale(40);
+                trajet2.setTempsTotal(60);
+                trajet2.setVitesseMoyenne(82);
+                trajet2.setMeteo("Ensoleillé");
+                trajet2.setTypeRoute("Campagne");
+                trajet2.setPeriode("Jour");
+
+                trajet1.save();
+                trajet2.save();
             </script>
         </div>
 
@@ -100,7 +102,7 @@
                 $.each(a, function (i) {
                     var monTrajet = Locstor.get(a[i]);
                     var liste_trajets = $('#liste_effectuees');
-                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">De '+monTrajet.depart+' vers '+monTrajet.arrivee+'</a></li>')
+                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">'+monTrajet.titre+'</a></li>')
 
                 });
 
@@ -115,7 +117,7 @@
                     var a = Locstor.list('trajet_');
                     $.each(a, function (i) {
                         var trajet = Locstor.get(a[i]);
-                        valeur = valeur + trajet.nb_km;
+                        valeur = valeur + trajet.distanceTotal;
                     });
 
 
@@ -138,7 +140,7 @@
             </div>
 
             <div data-role="content">
-                <h2>Details</h2>
+                <h2 id="text-titre"></h2>
 
                 <table>
                     <tr>
@@ -186,14 +188,15 @@
             <script type="text/javascript">
                 $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {
                     var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
-                    $('#text-depart').html(monTrajet.depart);
-                    $('#text-arrivee').html(monTrajet.arrivee);
-                    $('#text-km').html(monTrajet.nb_km+' km');
-                    $('#text-temps').html(monTrajet.temps+' min');
-                    $('#text-vitesse').html(monTrajet.vitesse_moyenne+' km/h');
+                    $('#text-titre').html(monTrajet.titre);
+                    $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
+                    $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
+                    $('#text-km').html(monTrajet.distanceTotal+' km');
+                    $('#text-temps').html(monTrajet.tempsTotal+' min');
+                    $('#text-vitesse').html(monTrajet.vitesseMoyenne+' km/h');
                     $('#text-meteo').html(monTrajet.meteo);
-                    $('#text-route').html(monTrajet.type_route);
-                    $('#text-periode').html(monTrajet.jour_nuit);
+                    $('#text-route').html(monTrajet.typeRoute);
+                    $('#text-periode').html(monTrajet.periode);
                 });
             </script>
         </div>
