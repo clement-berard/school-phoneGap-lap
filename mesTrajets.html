@@ -20,6 +20,7 @@
         <script type="text/javascript" src="js/main-config.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
         <script type="text/javascript" src="js/localhelper.js"></script>
+        <script type="text/javascript" src="js/trajet.js"></script>
 
         <title>LAP - La conduite</title>
     </head>
@@ -52,29 +53,16 @@
             </div>
 
             <script type="text/javascript">
-                var trajet1 = {
-                    depart: 'Chez michel',
-                    arrivee: 'Chez quentin',
-                    nb_km: 12,
-                    temps: 25,
-                    vitesse_moyenne: 50,
-                    meteo: 'soleil',
-                    type_route: 'campagne',
-                    jour_nuit: 'jour'
-                };
+                var trajet1 = new trajet("manuel");
+                trajet1.setTitre("Trajet 1");
+                trajet1.setDistanceTotale(22);
 
-                var trajet2 = {
-                    depart: 'Chez Damien',
-                    arrivee: 'Chez Renaud',
-                    nb_km: 40,
-                    temps: 30,
-                    vitesse_moyenne: 86,
-                    meteo: 'soleil',
-                    type_route: 'campagne',
-                    jour_nuit: 'jour'
-                };
-                Locstor.set('trajet_1', trajet1);
-                Locstor.set('trajet_2', trajet2);
+                var trajet2 = new trajet("manuel");
+                trajet2.setTitre("Trajet 2");
+                trajet2.setDistanceTotale(37);
+
+                trajet1.save();
+                trajet2.save();
             </script>
         </div>
 
@@ -100,7 +88,7 @@
                 $.each(a, function (i) {
                     var monTrajet = Locstor.get(a[i]);
                     var liste_trajets = $('#liste_effectuees');
-                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">De '+monTrajet.depart+' vers '+monTrajet.arrivee+'</a></li>')
+                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">'+monTrajet.titre+'</a></li>')
 
                 });
 
@@ -115,7 +103,7 @@
                     var a = Locstor.list('trajet_');
                     $.each(a, function (i) {
                         var trajet = Locstor.get(a[i]);
-                        valeur = valeur + trajet.nb_km;
+                        valeur = valeur + trajet.distanceTotal;
                     });
 
 
