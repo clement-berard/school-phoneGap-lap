@@ -186,21 +186,22 @@
             </div>
 
             <script type="text/javascript">
-                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {
-                    var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
-
-                    console.log("clé : "+Locstor.get('courant_trajet'));
-                    console.log("trajet : "+monTrajet);
-
-                    $('#text-titre').html(monTrajet.titre);
-                    $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
-                    $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
-                    $('#text-km').html(monTrajet.distanceTotal+' km');
-                    $('#text-temps').html(monTrajet.tempsTotal+' min');
-                    $('#text-vitesse').html(monTrajet.vitesseMoyenne+' km/h');
-                    $('#text-meteo').html(monTrajet.meteo);
-                    $('#text-route').html(monTrajet.typeRoute);
-                    $('#text-periode').html(monTrajet.periode);
+                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {                    
+                    if (Locstor.contains(Locstor.get('courant_trajet'))) {
+                        var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
+                        $('#text-titre').html(monTrajet.titre);
+                        $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
+                        $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
+                        $('#text-km').html(monTrajet.distanceTotal+' km');
+                        $('#text-temps').html(monTrajet.tempsTotal+' min');
+                        $('#text-vitesse').html(monTrajet.vitesseMoyenne+' km/h');
+                        $('#text-meteo').html(monTrajet.meteo);
+                        $('#text-route').html(monTrajet.typeRoute);
+                        $('#text-periode').html(monTrajet.periode);
+                    } 
+                    else {
+                        alert("Clé inconnue : "+Locstor.get('courant_trajet'));
+                    }                    
                 });
             </script>
         </div>
