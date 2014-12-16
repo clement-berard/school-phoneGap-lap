@@ -51,11 +51,25 @@
         <script type="text/javascript" src="js/menu.js"></script>
         <script type="text/javascript" src="js/fonctionMap.js"></script>
         <script type="text/javascript" src="js/trajet.js"></script>
+        <script type="text/javascript" src="js/tools.js"></script>
         <script type="text/javascript">
             // pour initialiser l'app
             app.initialize();
 
             var myMap = new fonctionMap('nav_map').init();
+            runCurrentLocation();
+
+            function runCurrentLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(callForLocationDebut, error_callback);
+                } else {
+                    error('not supported');
+                }
+            }
+
+            function callForLocationDebut(position) {
+                myMap.setCenter(position);
+            }
         </script>
     </body>
 </html>
