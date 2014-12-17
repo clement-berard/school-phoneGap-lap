@@ -33,6 +33,7 @@
     </div>
     <div data-role="content">
         <button id="btnStart" class="start">Démarrer la conduite</button>
+        <div id="wait_for_save"></div>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <!-- footer -->
@@ -83,6 +84,7 @@
             timeoutForUpdate = 0;
             $(this).html(('Démarrer la conduite \<div id=\"timer\"> 00:00:00</div>'));
             // le temps total
+            $('#wait_for_save').html('Enregistrement en cours...');
             runCurrentLocation('arrivee');
 
 
@@ -138,7 +140,7 @@
         trajet.setVitesseMoyenne(dist/tem);
         trajet.setTempsTotal(tem);
         trajet.save();
-
+        window.location.href="mesTrajets.html";
 
     }
     /**
