@@ -13,10 +13,10 @@
 }
 
 #img_position {
-    background-image: url(../crosshair4.png);
+    background-image: url(../img/gps.png);
     position: absolute;
     height: 32px;
     width: 32px;
-    left: 50%;
+    left: 49%;
     top: 50%;
 }
