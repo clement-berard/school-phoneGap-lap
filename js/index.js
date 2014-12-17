@@ -16,10 +16,10 @@ var app = {
         document.addEventListener('deviceready', this.onDeviceReady, false);
 
 
-        document.body.addEventListener("touchmove", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-        }, false);
+        //document.body.addEventListener("touchmove", function(event) {
+        //    event.preventDefault();
+        //    event.stopPropagation();
+        //}, false);
 
         mainConfig.cordova = 0;
 
