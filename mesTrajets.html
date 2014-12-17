@@ -66,24 +66,29 @@
                 });
 
                 $(document).on('pagebeforeshow', '#page-listeTrajets', function (e, data) {
-                    var monProfil = Locstor.get('monProfil');
-                    var valeur = 0;
+                    if (Locstor.contains('monProfil')) {
+                        var monProfil = Locstor.get('monProfil');
+                        var valeur = 0;
 
-                    var a = Locstor.list('trajet_');
-                    $.each(a, function (i) {
-                        var trajet = Locstor.get(a[i]);
-                        valeur = valeur + trajet.distanceTotal;
-                    });
+                        var a = Locstor.list('trajet_');
+                        $.each(a, function (i) {
+                            var trajet = Locstor.get(a[i]);
+                            valeur = valeur + trajet.distanceTotal;
+                        });
 
 
-                    $('#slider-distance').val(valeur);
-                    $("#slider-distance").attr("max", monProfil.distanceTotale);
-                    $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+valeur*100/monProfil.distanceTotale+" %)");
-                    $('#slider-distance').slider("refresh");
-                    
-                    $("input").remove();
-                    $(".ui-slider-handle").remove();
-                    $('.ui-slider-track').css('margin','0 0 0 0').css('pointer-events','none');
+                        $('#slider-distance').val(valeur);
+                        $("#slider-distance").attr("max", monProfil.distanceTotale);
+                        $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+valeur*100/monProfil.distanceTotale+" %)");
+                        $('#slider-distance').slider("refresh");
+                        
+                        $("input").remove();
+                        $(".ui-slider-handle").remove();
+                        $('.ui-slider-track').css('margin','0 0 0 0').css('pointer-events','none');
+                    }
+                    else {
+                        window.location.href="monProfil.html";
+                    } 
                 });
             </script>
         </div>
