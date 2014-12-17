@@ -133,3 +133,7 @@ h1 {
     width: 500px;
     height: 500px;
 }
+
+#wait_for_save{
+    text-align: center;color: #005599
+}
