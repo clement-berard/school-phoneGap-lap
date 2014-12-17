@@ -16,6 +16,7 @@
     <title>LAP - Navigation manuelle</title>
 </head>
 <body>
+<!-- volet glissant -->
 <div id="menu">
     <h3>Menu</h3>
     <ul>
@@ -25,6 +26,7 @@
         <li><a href="monProfil.html" class="contentLink" rel="external">Profil </a></li>
     </ul>
 </div>
+<!-- Page navigation manuelle -->
 <div data-role="page" id="page-automatique">
     <div data-role="header" class="entete" data-theme="a">
         <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
@@ -64,7 +66,7 @@
             <option value="Jour">Jour</option>
             <option value="Nuit">Nuit</option>
         </select>
-
+        <!-- bouton qui execute la fonction javascript "getTotalKilometers(toutes_les_etapes) qui calcule la distance totale entre tous les marqueurs" -->
         <div id="auto_map_div" style="width:auto;height:500px"></div>
         <input type="button" id="calculerDistance" value="Calculer Distance">
     </div>
@@ -91,26 +93,34 @@
     // pour initialiser l'app
     app.initialize();
 
+    //Cration d'un trajet
     var trajet = new trajet("manuel");
 
+    //Creation de la google map dans la div d'id=""
     myMap = new fonctionMap('auto_map_div').init();
     var mapGoogle = myMap.getMap();
     mapGoogle.setOptions({
-        disableClickZoom: true
+        disableClickZoom: true      //Zoom lors du clique desactive
     });
 
+    // Ajout de l'evenement lors d'un simple clic sur la map qui positionne le marker  
     google.maps.event.addListener(mapGoogle, 'click', function (event) {
         var id = myMap.uniqid();
         var coordonnes = event.latLng;
         myMap.addMarker(id, event.latLng);
         trajet.setEtape(coordonnes.lat(), coordonnes.lng());
     });
+
+    //Fonction appele lors d'un clic sur le bouton "Calculer Distance", elle calcule la distance totale entre tous les marqueurs
     $("#calculerDistance").click(function () {
-        var toutes_les_etapes = trajet.getEtapes();
-        var taille_toutes_les_etapes = Object.keys(toutes_les_etapes).length;
-        var coordonnes_depart = toutes_les_etapes[0];
-        var coordonnes_arrivee = toutes_les_etapes[taille_toutes_les_etapes - 1];
-        var distance = getTotalKilometers(toutes_les_etapes);
+        var toutes_les_etapes = trajet.getEtapes();                                   //recuperation de l'ensemble des etapes d'un trajet
+        var taille_toutes_les_etapes = Object.keys(toutes_les_etapes).length;         //Nombre totale d'etape dans un trajet
+        var coordonnes_depart = toutes_les_etapes[0];                                 // initialisation du point de depart  
+        var coordonnes_arrivee = toutes_les_etapes[taille_toutes_les_etapes - 1];     // initialisation du point d'arrive  
+        var distance = getTotalKilometers(toutes_les_etapes);                         // Calucule de la distace totale parcourue
+       
+
+        //Modification d'un trajet en fonction des informations saisies par l'utilisateur 
         trajet.setTitre(document.getElementById("text-titre").value);
         trajet.setDepart(coordonnes_depart.lat, coordonnes_depart.lng);
         trajet.setArrivee(coordonnes_arrivee.lat, coordonnes_arrivee.lng);
@@ -120,7 +130,12 @@
         trajet.setMeteo(document.getElementById("select-meteo").value);
         trajet.setTypeRoute(document.getElementById("select-route").value);
         trajet.setPeriode(document.getElementById("select-periode").value);
+
+        // Sauvegarde du trajet dans le local storage 
         trajet.save();
+
+        //Redirection vers la page mes trajets
+        window.location.href="mesTrajets.html";
     });
 </script>
 </body>

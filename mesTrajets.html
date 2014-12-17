@@ -78,10 +78,11 @@
                             valeur = valeur + trajet.distanceTotal;
                         });
 
+                        valeur = Math.round(valeur*100)/100
 
                         $('#slider-distance').val(valeur);
                         $("#slider-distance").attr("max", monProfil.distanceTotale);
-                        $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+valeur*100/monProfil.distanceTotale+" %)");
+                        $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
                         $('#slider-distance').slider("refresh");
                         
                         $("input").remove();
@@ -102,6 +103,8 @@
             </div>
 
             <div data-role="content">
+                <a href="mesTrajets.html" class="contentLink ui-btn" rel="external">Retour à la liste</a>
+
                 <h2 id="text-titre"></h2>
 
                 <table class="ui-li-divider ui-bar-a ui-first-child">
@@ -156,9 +159,9 @@
                         $('#text-titre').html(monTrajet.titre);
                         $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
                         $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
-                        $('#text-km').html(monTrajet.distanceTotal+' km');
+                        $('#text-km').html(Math.round(monTrajet.distanceTotal*100)/100+' km');
                         $('#text-temps').html(monTrajet.tempsTotal+' min');
-                        $('#text-vitesse').html(monTrajet.vitesseMoyenne+' km/h');
+                        $('#text-vitesse').html(Math.round(monTrajet.vitesseMoyenne*100)/100+' km/h');
                         $('#text-meteo').html(monTrajet.meteo);
                         $('#text-route').html(monTrajet.typeRoute);
                         $('#text-periode').html(monTrajet.periode);
