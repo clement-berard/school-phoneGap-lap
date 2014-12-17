@@ -1,3 +1,7 @@
+/**
+ * {} de fonctions pour afficher le menu
+ */
+
 $(function(){
 	var menuStatus;
 	

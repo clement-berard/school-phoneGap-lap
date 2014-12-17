@@ -14,13 +14,7 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
-
-
-        //document.body.addEventListener("touchmove", function(event) {
-        //    event.preventDefault();
-        //    event.stopPropagation();
-        //}, false);
-
+        // ne sert pas, au cas ou on doit controller si on utilise cordova ou pas avec des fonctions qui marchent pas sur le navigateur
         mainConfig.cordova = 0;
 
 
