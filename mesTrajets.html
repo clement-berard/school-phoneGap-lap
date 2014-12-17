@@ -48,7 +48,6 @@
                 <ul data-role="listview" data-inset="true" id="liste_effectuees"></ul>
 
                 <form >
-                    <label class="ui-body ui-body-a ui-corner-all" for="slider-distance">Distance totale parcourue :</label>
                     <p name="text-distance" id="text-distance" class="ui-body ui-body-a ui-corner-all"></p>
                     <input class="ui-body ui-body-a ui-corner-all" type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
                 </form>
@@ -82,7 +81,7 @@
 
                         $('#slider-distance').val(valeur);
                         $("#slider-distance").attr("max", monProfil.distanceTotale);
-                        $('#text-distance').html(valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
+                        $('#text-distance').html("Distance totale parcourue : <br />"+valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
                         $('#slider-distance').slider("refresh");
                         
                         $("input").remove();
@@ -103,7 +102,7 @@
             </div>
 
             <div data-role="content">
-                <a href="mesTrajets.html" class="contentLink ui-btn" rel="external">Retour à la liste</a>
+                <a href="mesTrajets.html" data-role="button" class="ui-btn ui-corner-all" rel="external">Retour à la liste</a>
 
                 <h2 id="text-titre"></h2>
 
