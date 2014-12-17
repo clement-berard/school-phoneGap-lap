@@ -60,9 +60,17 @@
 <script type="text/javascript">
     // pour initialiser l'app
     app.initialize();
+    // pour cette page, on ne veut pas de scroll donc on le desactive
+    document.body.addEventListener("touchmove", function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }, false);
 
     var myMap = new fonctionMap('nav_map').init();
-
+    // on ne veut pas que l'on puisse bouger la map
+    myMap.getMap().setOptions({
+        draggable: false
+    });
     runCurrentLocation();
 
     function runCurrentLocation() {
