@@ -32,23 +32,37 @@
         <h1>Navigation Manuelle</h1>
     </div>
     <div data-role="content">
-        <div>Titre de votre trajet</div>
-        <input type="text" name="titreManuelle" id="titreManuelle" value="">
+        <label for="text-titre">Titre du trajet :</label>
+        <input type="text" data-clear-btn="true" name="text-titre" id="text-titre" value="" placeholder="Titre">
 
-        <div>Temps de votre trajet</div>
-        <input type="text" name="tempsManuelle" id="tempsManuelle" value="">
+        <label for="number-temps">Temps de trajet (min) :</label>
+        <input type="number" data-clear-btn="true" name="number-temps" id="number-temps" placeholder="Temps total de votre trajet">
 
-        <div>Vitesse moyenne</div>
-        <input type="text" name="vitesseManuelle" id="vitesseManuelle" value="">
+        <label for="number-vitesse">Vitesse moyenne (km/h) :</label>
+        <input type="number" data-clear-btn="true" name="number-vitesse" id="number-vitesse" placeholder="Vitesse moyenne au cours de votre trajet">
 
-        <div>Meteo lors de votre trajet</div>
-        <input type="text" name="meteoManuelle" id="meteoManuelle" value="">
+        <label for="select-meteo" class="select">Météo :</label>
+        <select name="select-meteo" id="select-meteo">
+            <option value="Soleil">Soleil</option>
+            <option value="Pluie">Pluie</option>
+            <option value="Neige">Neige</option>
+            <option value="Verglas">Verglas</option>
+            <option value="Brouillard">Brouillard</option>
+        </select>
 
-        <div>Type de route emprintee</div>
-        <input type="text" name="routeManuelle" id="routeManuelle" value="">
+        <label for="select-route" class="select">Type de route :</label>
+        <select name="select-route" id="select-route">
+            <option value="Ville">Ville</option>
+            <option value="Autoroute">Autoroute</option>
+            <option value="Montage">Montage</option>
+            <option value="Campagne">Campagne</option>
+        </select>
 
-        <div>Vous avez conduit de: (jour/nuit)</div>
-        <input type="text" name="periodeManuelle" id="periodeManuelle" value="">
+        <label for="select-periode" class="select">Période :</label>
+        <select name="select-periode" id="select-periode">
+            <option value="Jour">Jour</option>
+            <option value="Nuit">Nuit</option>
+        </select>
 
         <div id="auto_map_div" style="width:auto;height:500px"></div>
         <input type="button" id="calculerDistance" value="Calculer Distance">
@@ -96,15 +110,15 @@
         var coordonnes_depart = toutes_les_etapes[0];
         var coordonnes_arrivee = toutes_les_etapes[taille_toutes_les_etapes - 1];
         var distance = getTotalKilometers(toutes_les_etapes);
-        trajet.setTitre($("titreManuelle").val());
+        trajet.setTitre(document.getElementById("text-titre").value);
         trajet.setDepart(coordonnes_depart.lat, coordonnes_depart.lng);
         trajet.setArrivee(coordonnes_arrivee.lat, coordonnes_arrivee.lng);
         trajet.setDistanceTotale(distance);
-        trajet.setTempsTotal($("tempsManuelle").val());
-        trajet.setVitesseMoyenne($("vitesseManuelle").val());
-        trajet.setMeteo($("meteoManuelle").val());
-        trajet.setTypeRoute($("routeManuelle").val());
-        trajet.setPeriode($("periodeManuelle").val());
+        trajet.setTempsTotal(document.getElementById("number-temps").value);
+        trajet.setVitesseMoyenne(document.getElementById("number-vitesse").value);
+        trajet.setMeteo(document.getElementById("select-meteo").value);
+        trajet.setTypeRoute(document.getElementById("select-route").value);
+        trajet.setPeriode(document.getElementById("select-periode").value);
         trajet.save();
     });
 </script>
