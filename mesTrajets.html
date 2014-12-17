@@ -38,7 +38,7 @@
         </div>
 
         <div data-role="page" id="page-listeTrajets" >
-            <div data-role="header" data-theme="a">
+            <div data-role="header" class="entete" data-theme="a">
                 <a href="#"class="showMenu">Menu</a>
                 <h1>Trajets Parcourus</h1>
             </div>
@@ -47,12 +47,12 @@
                 <h2>Mes trajets</h2>
                 <ul data-role="listview" data-inset="true" id="liste_effectuees"></ul>
 
-                <form>
-                    <label for="slider-distance">Distance totale parcourue :</label>
-                    <p name="text-distance" id="text-distance"></p>
-                    <input type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
+                <form >
+                    <label class="ui-body ui-body-a ui-corner-all" for="slider-distance">Distance totale parcourue :</label>
+                    <p name="text-distance" id="text-distance" class="ui-body ui-body-a ui-corner-all"></p>
+                    <input class="ui-body ui-body-a ui-corner-all" type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
                 </form>
-            </div>
+            </div> 
 
             <script>
                 var a = Locstor.list('trajet_');
@@ -96,7 +96,7 @@
         </div>
 
         <div data-role="page" id="page-detailsTrajet" >
-            <div data-role="header" data-theme="a">
+            <div data-role="header" class="entete" data-theme="a">
                 <a href="#"class="showMenu">Menu</a>
                 <h1>Détails de mon trajet</h1>
             </div>
@@ -104,44 +104,45 @@
             <div data-role="content">
                 <h2 id="text-titre"></h2>
 
-                <table>
-                    <tr>
-                        <td>Départ</td>
+                <table class="ui-li-divider ui-bar-a ui-first-child">
+                    <tr class="ui-body ui-body-a ui-corner-all">
+
+                        <td>Départ:</td>
                         <td id="text-depart"></td>
                     </tr>
 
-                    <tr>
-                       <td>Arrivée</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                       <td>Arrivée:</td>
                         <td id="text-arrivee"></td>
                     </tr>
 
-                    <tr>
-                        <td>Distance</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Distance:</td>
                         <td id="text-km"></td>
                     </tr>
 
-                    <tr>
-                        <td>Temps</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Temps:</td>
                         <td id="text-temps"></td>
                     </tr>
 
-                    <tr>
-                        <td>Vitesse moyenne</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Vitesse moyenne:</td>
                         <td id="text-vitesse"></td>
                     </tr>
 
-                    <tr>
-                        <td>Météo</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Météo:</td>
                         <td id="text-meteo"></td>
                     </tr>
 
-                    <tr>
-                        <td>Type de route</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Type de route:</td>
                         <td id="text-route"></td>
                     </tr>
 
-                    <tr>
-                        <td>Période</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Période:</td>
                         <td id="text-periode"></td>
                     </tr>
                 </table>
