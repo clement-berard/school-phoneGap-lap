@@ -28,7 +28,8 @@
 </div>
 <div data-role="page" id="navigation_page_id">
     <div data-role="header" class="entete" data-theme="a">
-        <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
+        <a href="#" class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow"
+           data-form="ui-icon"> </a>
 
         <h1>LAP</h1>
     </div>
@@ -38,7 +39,9 @@
     </div>
     <div id="img_position"></div>
     <div data-role="popup" id="popupBasic">
-        <p>Profil enregistré !<p>
+        <p>Profil enregistré !
+
+        <p>
     </div>
 
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -60,11 +63,24 @@
 <script type="text/javascript">
     // pour initialiser l'app
     app.initialize();
+    // pour cette page, on ne veut pas de scroll donc on le desactive
+    document.body.addEventListener("touchmove", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }, false);
 
     var myMap = new fonctionMap('nav_map').init();
+    // on ne veut pas que l'on puisse bouger la map
+    myMap.getMap().setOptions({
+        draggable: false
+    });
 
+    // appel de la fonction pour trouver notre position
     runCurrentLocation();
-
+    /**
+     * fonction qui fait appel a la fonction de geolocalisation HTML5/phonegap
+     * avec son petit callback callForLocation
+     */
     function runCurrentLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(callForLocation, error_callback);
@@ -72,19 +88,26 @@
             error('not supported');
         }
     }
-
+    /**
+     * callback quand la geolocalisation a ete trouvee
+     * @param position
+     */
     function callForLocation(position) {
+        // on recupere les coordonnees et on recentre la carte
         lat = position.coords.latitude;
         lnng = position.coords.longitude;
         var center = new google.maps.LatLng(lat, lnng);
         var o_map = myMap.getMap();
         o_map.setZoom(16);
-        myMap.moveToLocation(o_map,lat, lnng);
+        myMap.moveToLocation(o_map, lat, lnng);
     }
-
+    /**
+     * on appelle la fonction runCurrentLocation toutes les 5ms pour
+     * recentrer la carte sur notre position, comme ca si on bouge la carte bouge aussi !
+     */
     setInterval(function () {
         runCurrentLocation()
-    }, 5); // Appel toutes les 5 secondes
+    }, 5); // Appel toutes les 5 ms
 </script>
 </body>
 </html>
