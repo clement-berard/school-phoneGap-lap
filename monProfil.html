@@ -74,6 +74,11 @@
 
                     Locstor.set('monProfil', monProfil);
                     $( "#popupBasic" ).popup( "open" );
+
+                    
+                    setTimeout(function() {
+                        window.location.href="nouveau_trajet.html";
+                    }, 1000);
                 };
 
                 $(document).on('pagebeforeshow', '#page-testTrajet', function (e, data) {
