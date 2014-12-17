@@ -8,7 +8,7 @@
 	font-size:12px;
 	color:#fff;
 	margin:0;
-	background-color:#5a5959;
+	background-color: #49a5ff;
 	padding:4px 0 4px 10px;
 	border-top:solid #6b6b6b 1px;
 	border-bottom:solid #3d3d3d 1px;
@@ -21,7 +21,7 @@
 }
 #menu ul li {
   list-style-type: none;
-  color: red;
+  background-color: #666666;
   margin: 0px 0;
 }
 #menu ul li a:link, #menu ul li a:visited {
@@ -38,4 +38,12 @@
 }
 #menu ul li a:hover, #menu ul li a:active {
   background-color: #716f6f;
+}
+
+.entete{
+  background-color: #49a5ff !important;
+}
+
+.buttonEnreg{
+  background-color: #66CC00 !important;
 }

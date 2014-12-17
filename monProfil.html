@@ -35,15 +35,15 @@
         </div>
 
         <div data-role="page" id="page-testTrajet">
-            <div data-role="header" data-theme="a">
-                <a href="#"class="showMenu">Menu</a>
+            <div data-role="header" class="entete" data-theme="a">
+                <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
                 <h1>Paramètres</h1>
             </div>
 
-            <div data-role="content">
+            <div data-role="content"  class="ui-li-divider ui-bar-a ui-first-child">
                 <h2>Mon Profil</h2>
 
-                <form>
+                <form class="ui-body ui-body-a ui-corner-all">
                     <label for="text-prenom">Prénom</label>
                     <input type="text" data-clear-btn="true" name="text-prenom" id="text-prenom" value="" placeholder="Prénom">
 
@@ -53,7 +53,7 @@
                     <label for="number-distance">Distance totale</label>
                     <input type="number" data-clear-btn="true" name="number-distance" id="number-distance" placeholder="Distance totale à parcourir">
 
-                    <a id="letsdone" href="#" data-role="button" onclick="enregisterProfil();">Enregistrer</a>
+                    <a id="letsdone" href="#" data-role="button" class="buttonEnreg" onclick="enregisterProfil();">Enregistrer</a>
                     <div data-role="popup" id="popupBasic">
                         <p>Profil enregistré !<p>
                     </div>
