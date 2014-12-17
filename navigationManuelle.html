@@ -70,9 +70,8 @@
         <!-- bouton qui execute la fonction javascript "getTotalKilometers(toutes_les_etapes) qui calcule la distance totale entre tous les marqueurs" -->
         <div id="auto_map_div" style="width:auto;height:500px"></div>
         <input type="button" id="calculerDistance" value="Calculer Distance">
-        <div id="custom-border-radius">
-            <a href="#calculerDistance" class="ui-btn ui-icon-carat-d ui-btn-icon-notext ui-corner-all" id="descendre">No text</a>
-        </div>
+        <img src="img/down13.png" id="descendre" data-target="#calculerDistance">
+
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <div data-role="navbar">
@@ -103,7 +102,7 @@
      */
     $('#descendre').bind("click", function (event) {
         event.preventDefault();
-        var target = $(this).attr("href");
+        var target = $(this).data("target");
         var targetPos = $('[id=' + target.replace(/#/g, "") + ']').offset().top;
 
         $('html,body').animate({
