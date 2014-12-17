@@ -72,7 +72,7 @@ function fonctionMap(myMapId) {
             var c = new google.maps.InfoWindow({
                 content: content
             });
-            c.open(this.Mymap, markers.name);
+            c.open(this.Mymap, m);
         }
 
 

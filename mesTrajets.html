@@ -14,12 +14,14 @@
 
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/urlHelper.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/main-config.js"></script>
         <script type="text/javascript" src="js/menu.js"></script>
         <script type="text/javascript" src="js/localhelper.js"></script>
+        <script type="text/javascript" src="js/fonctionMap.js"></script>
         <script type="text/javascript" src="js/trajet.js"></script>
 
         <title>LAP - La conduite</title>
@@ -36,8 +38,8 @@
         </div>
 
         <div data-role="page" id="page-listeTrajets" >
-            <div data-role="header" data-theme="a">
-                <a href="#"class="showMenu">Menu</a>
+            <div data-role="header" class="entete" data-theme="a">
+                <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
                 <h1>Trajets Parcourus</h1>
             </div>
 
@@ -45,12 +47,12 @@
                 <h2>Mes trajets</h2>
                 <ul data-role="listview" data-inset="true" id="liste_effectuees"></ul>
 
-                <form>
-                    <label for="slider-distance">Distance totale parcourue :</label>
-                    <p name="text-distance" id="text-distance"></p>
-                    <input type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
+                <form >
+                    <label class="ui-body ui-body-a ui-corner-all" for="slider-distance">Distance totale parcourue :</label>
+                    <p name="text-distance" id="text-distance" class="ui-body ui-body-a ui-corner-all"></p>
+                    <input class="ui-body ui-body-a ui-corner-all" type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
                 </form>
-            </div>
+            </div> 
 
             <script>
                 var a = Locstor.list('trajet_');
@@ -95,55 +97,57 @@
         </div>
 
         <div data-role="page" id="page-detailsTrajet" >
-            <div data-role="header" data-theme="a">
-                <a href="#"class="showMenu">Menu</a>
+            <div data-role="header" class="entete" data-theme="a">
+                <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
                 <h1>Détails de mon trajet</h1>
             </div>
 
             <div data-role="content">
                 <h2 id="text-titre"></h2>
 
-                <table>
-                    <tr>
-                        <td>Départ</td>
+                <table class="ui-li-divider ui-bar-a ui-first-child">
+                    <tr class="ui-body ui-body-a ui-corner-all">
+
+                        <td>Départ:</td>
                         <td id="text-depart"></td>
                     </tr>
 
-                    <tr>
-                       <td>Arrivée</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                       <td>Arrivée:</td>
                         <td id="text-arrivee"></td>
                     </tr>
 
-                    <tr>
-                        <td>Distance</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Distance:</td>
                         <td id="text-km"></td>
                     </tr>
 
-                    <tr>
-                        <td>Temps</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Temps:</td>
                         <td id="text-temps"></td>
                     </tr>
 
-                    <tr>
-                        <td>Vitesse moyenne</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Vitesse moyenne:</td>
                         <td id="text-vitesse"></td>
                     </tr>
 
-                    <tr>
-                        <td>Météo</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Météo:</td>
                         <td id="text-meteo"></td>
                     </tr>
 
-                    <tr>
-                        <td>Type de route</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Type de route:</td>
                         <td id="text-route"></td>
                     </tr>
 
-                    <tr>
-                        <td>Période</td>
+                    <tr class="ui-body ui-body-a ui-corner-all">
+                        <td>Période:</td>
                         <td id="text-periode"></td>
                     </tr>
                 </table>
+                <div id="map_details" style="width: auto;height: 500px"></div>
             </div>
 
             <script type="text/javascript">
@@ -159,6 +163,34 @@
                         $('#text-meteo').html(monTrajet.meteo);
                         $('#text-route').html(monTrajet.typeRoute);
                         $('#text-periode').html(monTrajet.periode);
+
+
+                        var myMap = new fonctionMap('map_details').init();
+                        myMap.addMarker('depart',myMap.getGoogleLocation(monTrajet.depart.lat,monTrajet.depart.lng),'<span style="color: red">Départ</span>');
+                        myMap.addMarker('arrivee',myMap.getGoogleLocation(monTrajet.arrivee.lat,monTrajet.arrivee.lng),'<span style="color: red">Arrivée</span>');
+                        var les_etapes =  monTrajet.etapes;
+                        var taille_etapes = Object.keys(les_etapes).length;
+                        if(taille_etapes > 1){
+                            for (var i = 1; i < taille_etapes-1; i++) {
+                                myMap.addMarker('arrivee',myMap.getGoogleLocation(les_etapes[i].lat,les_etapes[i].lng),'Etape '+i);
+                            }
+                        }
+
+                        var tableauPointsPolyline = [];
+
+                        for (var j = 0; j < taille_etapes; j++) {
+                            tableauPointsPolyline[j] = myMap.getGoogleLocation(les_etapes[j].lat,les_etapes[j].lng);
+                        }
+
+                        var optionsPolyline = {
+                            map: myMap.getMap(),
+                            path: tableauPointsPolyline
+                        };
+
+                        var maPolyline = new google.maps.Polyline(optionsPolyline);
+
+
+
                     } 
                     else {
                         alert("Clé inconnue : "+Locstor.get('courant_trajet'));
