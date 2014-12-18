@@ -49,7 +49,9 @@
 
         <script>
             $(document).on('pagebeforeshow', '#page-newtrajet', function (e, data) {
+                // Si un profil n'a pas été renseigné
                 if (!Locstor.contains('monProfil')) {
+                    // Redirection vers la page de création de profil
                     window.location.href="monProfil.html";
                 }
             });

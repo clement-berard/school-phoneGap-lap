@@ -26,10 +26,13 @@
         <script type="text/javascript">
             app.initialize();
 
+            // Si un profil a déjà été renseigné
             if (Locstor.contains('monProfil')) {
+                // Redirection vers la pages des nouveaux trajets
                 window.location.href="nouveau_trajet.html";
             }
             else {
+                // Redirection vers la page de création de profil
                 window.location.href="monProfil.html";
             }
         </script>

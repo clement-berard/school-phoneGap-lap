@@ -54,41 +54,63 @@
             </div> 
 
             <script>
+                // On récupère toutes les clés présentes dans le local storage commençant par "trajet_"
                 var a = Locstor.list('trajet_');
+                // Pour chacune de ces clés
                 $.each(a, function (i) {
+                    // Récupération du trajet correspondant
                     var monTrajet = Locstor.get(a[i]);
+                    // Récupération de la liste HTML (balise <ul>)
                     var liste_trajets = $('#liste_effectuees');
+                    // Ajout d'un item a la liste
                     liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">'+monTrajet.titre+'</a></li>')
 
                 });
 
+                // Lors du clic sur un des élements de la liste des trajets on sauvegarde dans le local storage
+                // la clé du trajet cliqué
                 $('ul').children('li').on('click', function () {
                     Locstor.set('courant_trajet', $(this).attr('data-name'));
                 });
 
+                // Exécuté avant d'afficher la page de la liste des trajets
                 $(document).on('pagebeforeshow', '#page-listeTrajets', function (e, data) {
+                    // Si un profil a déjà été renseigné
                     if (Locstor.contains('monProfil')) {
+                        // Récupération du profil courant
                         var monProfil = Locstor.get('monProfil');
+                        // Initialisation de la variable contenant la distance totale déjà parcourue
                         var valeur = 0;
 
+                        // Récupération de toutes les clés présentes dans le local storage commençant par "trajet_"
                         var a = Locstor.list('trajet_');
+                        // Pour chacune de ces clés
                         $.each(a, function (i) {
+                            // Récupération du trajet correspondant
                             var trajet = Locstor.get(a[i]);
+                            // Ajout de la distance parcourue lors de ce trajet à la distance totale
                             valeur = valeur + trajet.distanceTotal;
                         });
 
+                        // Arrondi de la distance totale avec 2 décimales
                         valeur = Math.round(valeur*100)/100
 
+                        // Définition de la valeur de la barre de progression à la distance totale parcourue
                         $('#slider-distance').val(valeur);
+                        // Définition de la valeur maximale de la barre de progression à la valeur renseigné dans le profil
                         $("#slider-distance").attr("max", monProfil.distanceTotale);
+                        // Affichage de la distance parcourus, de la distance à parcourir et du pourcentage réalisé
                         $('#text-distance').html("Distance totale parcourue : <br />"+valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
+                        // Mise à jour de la barre de progression pour afficher les valeurs renseignées
                         $('#slider-distance').slider("refresh");
                         
+                        // Modification du slider pour qu'il ressemble à une barre de progression
                         $("input").remove();
                         $(".ui-slider-handle").remove();
                         $('.ui-slider-track').css('margin','0 0 0 0').css('pointer-events','none');
                     }
                     else {
+                        // Si aucun profil n'est renseigné, redirection vers la page de création du profil
                         window.location.href="monProfil.html";
                     } 
                 });
@@ -152,9 +174,13 @@
             </div>
 
             <script type="text/javascript">
-                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {                    
+                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {     
+                    // si un trajet à afficher est bien renseigné dans le local storage               
                     if (Locstor.contains(Locstor.get('courant_trajet'))) {
+
+                        // Récupération du trajet à afficher à partir du local storage
                         var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
+                        // Affichage des informations du trajet
                         $('#text-titre').html(monTrajet.titre);
                         $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
                         $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
@@ -165,10 +191,12 @@
                         $('#text-route').html(monTrajet.typeRoute);
                         $('#text-periode').html(monTrajet.periode);
 
-
+                        // Création du carte
                         var myMap = new fonctionMap('map_details').init();
+                        // Ajout des marker de départ et d'arrivée sur la carte
                         myMap.addMarker('depart',myMap.getGoogleLocation(monTrajet.depart.lat,monTrajet.depart.lng),'<span style="color: red">Départ</span>');
                         myMap.addMarker('arrivee',myMap.getGoogleLocation(monTrajet.arrivee.lat,monTrajet.arrivee.lng),'<span style="color: red">Arrivée</span>');
+                        // Récupération des étapes du trajet
                         var les_etapes =  monTrajet.etapes;
                         var taille_etapes = Object.keys(les_etapes).length;
                         if(taille_etapes > 1){
