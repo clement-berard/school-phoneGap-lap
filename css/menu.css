@@ -47,3 +47,9 @@
 #letsdone{
   background-color: grey !important; 
 }
+
+.ui-btn {
+    background-color: #49a5ff !important;
+    border-radius: 0 !important;
+    color: white !important ;
+}
