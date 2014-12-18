@@ -69,8 +69,8 @@
         </select>
         <!-- bouton qui execute la fonction javascript "getTotalKilometers(toutes_les_etapes) qui calcule la distance totale entre tous les marqueurs" -->
         <div id="auto_map_div" style="width:auto;height:500px"></div>
-        <input type="button" id="calculerDistance" value="Calculer Distance">
-        <img src="img/down13.png" id="descendre" data-target="#calculerDistance">
+        <a id="letsdone" href="#" data-role="button" class="buttonEnreg" onclick="calculerDistance();">Enregistrer</a>
+        <img src="img/down13.png" id="descendre" data-target="#letsdone">
 
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -132,7 +132,7 @@
     });
 
     //Fonction appele lors d'un clic sur le bouton "Calculer Distance", elle calcule la distance totale entre tous les marqueurs
-    $("#calculerDistance").click(function () {
+    function calculerDistance(){
         var toutes_les_etapes = trajet.getEtapes();                                   //recuperation de l'ensemble des etapes d'un trajet
         var taille_toutes_les_etapes = Object.keys(toutes_les_etapes).length;         //Nombre totale d'etape dans un trajet
         var coordonnes_depart = toutes_les_etapes[0];                                 // initialisation du point de depart  
@@ -156,7 +156,9 @@
 
         //Redirection vers la page mes trajets
         window.location.href="mesTrajets.html";
-    });
+    };
+
+    
 </script>
 </body>
 </html>
