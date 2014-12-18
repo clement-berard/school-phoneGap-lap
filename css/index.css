@@ -138,7 +138,8 @@ h1 {
     display: block;
     margin-top: 2%;
     width: auto;
-    height: 500px;
+    min-height: 500px;
+
 }
 #choixAuto{
     width: 77% !important;
