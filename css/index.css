@@ -148,3 +148,12 @@ h1 {
     height: 100% !important;
 }
 
+.entete a{
+    background-color: #49a5ff !important;
+    border-radius: 0 !important;
+}
+
+.entete h1{
+    color: white;
+}
+

@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="css/menu.css" />
         <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
         <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
-
+        <link rel="stylesheet" type="text/css" href="css/manuelle.css"/>
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
@@ -43,29 +43,16 @@
         </div>
         <div data-role="content">
             <h2>Nouveau trajet</h2>
-            <div id="choix">
-                <ul>
-                <div id="choixAuto" class="ui-input-btn ui-btn ui-btn-inline">
-                    Automatique
-                    <input data-enhanced="true" value="Automatique" href="automatique.html" rel="external" type="button">
-                </div>
-                </ul>
-                <ul >
-                <div id="choixManuel" class="ui-input-btn ui-btn ui-btn-inline">
-                    Manuel
-                    <input data-enhanced="true" value="Manuel" href="navigationManuelle.html" rel="external" type="button">
-                </div>
-            </ul>
-            </div>
+            
+                <a class="ui-btn" href="automatique.html" rel="external">Automatique</a>
+                <a class="ui-btn" href="navigationManuelle.html" rel="external">Manuel</a>
             
         </div>
 
         <script>
             //Si l'utilisateur n'a pas de profil on le redirige vers la page de creation des profils
             $(document).on('pagebeforeshow', '#page-newtrajet', function (e, data) {
-                // Si un profil n'a pas été renseigné
                 if (!Locstor.contains('monProfil')) {
-                    // Redirection vers la page de création de profil
                     window.location.href="monProfil.html";
                 }
             });
