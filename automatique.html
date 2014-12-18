@@ -63,7 +63,7 @@
                 <option value="Jour">Jour</option>
                     <option value="Nuit">Nuit</option>
             </select>
-            <input type="button" id="enregistrerTrajetBtn" value="Enregistrer">
+            <a id="enregistrerTrajetBtn" href="#" data-role="button" class="buttonEnreg" onclick="enregistrerTrajet();">Enregistrer</a>
         </div>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
@@ -178,16 +178,13 @@
         $('#wait_for_save').html('Veuillez saisir les informations suivantes');
         $('#more_information_form').slideDown();
 
-        $('#enregistrerTrajetBtn').on('click',function(){
+         function enregistrerTrajet(){
             trajet.setMeteo(document.getElementById("select-meteo").value);
             trajet.setTypeRoute(document.getElementById("select-route").value);
             trajet.setPeriode(document.getElementById("select-periode").value);
             trajet.save();
             window.location.href="mesTrajets.html";
-
-        });
-
-
+         };
 
     }
     /**
