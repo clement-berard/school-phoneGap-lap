@@ -1,7 +1,7 @@
 #descendre {
 	position: fixed;
-	bottom: 0%;
-	right: 0%;
+	bottom: 1%;
+	right: 1%;
 	height: 64px;
 	width: 64px;
 	cursor: pointer;

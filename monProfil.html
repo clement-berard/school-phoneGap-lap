@@ -24,6 +24,7 @@
         <title>LAP - La conduite</title>
     </head>
     <body>
+     <!-- volet glissant -->
         <div id="menu">
             <h3>Menu</h3>
             <ul>
@@ -34,6 +35,7 @@
             </ul>
         </div>
 
+        <!--Page de creation du profil-->
         <div data-role="page" id="page-testTrajet">
             <div data-role="header" class="entete" data-theme="a">
                 <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
@@ -50,9 +52,10 @@
                     <label for="text-nom">Nom</label>
                     <input type="text" data-clear-btn="true" name="text-nom" id="text-nom" value="" placeholder="Nom">
 
-                    <label for="number-distance">Distance totale</label>
+                    <label for="number-distance">Distance totale (km)</label>
                     <input type="number" data-clear-btn="true" name="number-distance" id="number-distance" placeholder="Distance totale à parcourir">
 
+                    <!--Bouton qui execute la fonction "enregisterProfil()"-->
                     <a id="letsdone" href="#" data-role="button" class="buttonEnreg" onclick="enregisterProfil();">Enregistrer</a>
                     <div data-role="popup" id="popupBasic">
                         <p>Profil enregistré !<p>
