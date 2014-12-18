@@ -27,6 +27,7 @@
         <title>LAP - La conduite</title>
     </head>
     <body>
+        <!-- volet glissant -->
         <div id="menu">
             <h3>Menu</h3>
             <ul>
@@ -37,6 +38,7 @@
             </ul>
         </div>
 
+        <!--Page des trajets parcourus -->
         <div data-role="page" id="page-listeTrajets" >
             <div data-role="header" class="entete" data-theme="a">
                 <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
@@ -54,6 +56,7 @@
             </div> 
 
             <script>
+                // Recuperation des trajets sauvegardée dans le local storage
                 var a = Locstor.list('trajet_');
                 $.each(a, function (i) {
                     var monTrajet = Locstor.get(a[i]);
@@ -71,6 +74,7 @@
                         var monProfil = Locstor.get('monProfil');
                         var valeur = 0;
 
+                        //Calcul de la distance total parcourure 
                         var a = Locstor.list('trajet_');
                         $.each(a, function (i) {
                             var trajet = Locstor.get(a[i]);
@@ -79,6 +83,7 @@
 
                         valeur = Math.round(valeur*100)/100
 
+                        //Creation de la bar de progression
                         $('#slider-distance').val(valeur);
                         $("#slider-distance").attr("max", monProfil.distanceTotale);
                         $('#text-distance').html("Distance totale parcourue : <br />"+valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
