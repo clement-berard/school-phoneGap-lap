@@ -34,6 +34,32 @@
     <div data-role="content">
         <button id="btnStart" class="start">Démarrer la conduite</button>
         <div id="wait_for_save"></div>
+        <div id="more_information_form">
+            <label for="select-meteo" class="select">Météo :</label>
+            <select name="select-meteo" id="select-meteo">
+                <option value="Soleil">Soleil</option>
+                <option value="Nuageux">Nuageux</option>
+                    <option value="Pluie">Pluie</option>
+                    <option value="Neige">Neige</option>
+                    <option value="Verglas">Verglas</option>
+                <option value="Brouillard">Brouillard</option>
+            </select>
+
+            <label for="select-route" class="select">Type de route :</label>
+            <select name="select-route" id="select-route">
+                <option value="Ville">Ville</option>
+                    <option value="Autoroute">Autoroute</option>
+                    <option value="Montagne">Montagne</option>
+                    <option value="Campagne">Campagne</option>
+            </select>
+
+            <label for="select-periode" class="select">Période :</label>
+            <select name="select-periode" id="select-periode">
+                <option value="Jour">Jour</option>
+                    <option value="Nuit">Nuit</option>
+            </select>
+            <input type="button" id="enregistrerTrajetBtn" value="Enregistrer">
+        </div>
     </div>
     <div data-role="footer" data-position="fixed" data-tap-toggle="false">
         <!-- footer -->
@@ -53,6 +79,9 @@
 <script type="text/javascript" src="js/tools.js"></script>
 <script type="text/javascript">
 
+
+    // on cache le formulaire d'informations supplementaires au debut
+    $('#more_information_form').hide();
     // creation d'un trajet
 
     var trajet = new trajet('automatique');
@@ -84,7 +113,7 @@
             timeoutForUpdate = 0;
             $(this).html(('Démarrer la conduite \<div id=\"timer\"> 00:00:00</div>'));
             // le temps total
-            $('#wait_for_save').html('Enregistrement en cours...');
+            $('#wait_for_save').html('Calculs du trajet en cours...');
             runCurrentLocation('arrivee');
 
 
@@ -94,6 +123,8 @@
 
 
     });
+
+
 
 
     function runCurrentLocation(type) {
@@ -139,8 +170,20 @@
         trajet.setDistanceTotale(dist);
         trajet.setVitesseMoyenne(dist/tem);
         trajet.setTempsTotal(tem);
-        trajet.save();
-        window.location.href="mesTrajets.html";
+
+        $('#wait_for_save').html('Veuillez saisir les informations suivantes');
+        $('#more_information_form').slideDown();
+
+        $('#enregistrerTrajetBtn').on('click',function(){
+            trajet.setMeteo(document.getElementById("select-meteo").value);
+            trajet.setTypeRoute(document.getElementById("select-route").value);
+            trajet.setPeriode(document.getElementById("select-periode").value);
+            trajet.save();
+            window.location.href="mesTrajets.html";
+
+        });
+
+
 
     }
     /**
@@ -163,7 +206,7 @@
     }, 1000); // Appel toutes les secondes
     setInterval(function () {
         runCurrentLocation('update')
-    }, 10000); // Appel toutes les 10 secondes
+    }, 180000); // Appel toutes les 10 secondes
 
 
 </script>
