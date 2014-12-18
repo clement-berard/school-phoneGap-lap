@@ -6,3 +6,8 @@
 	width: 64px;
 	cursor: pointer;
 }
+
+.ui-btn {
+    background-color: #49a5ff !important;
+}
+

@@ -140,3 +140,12 @@ h1 {
     width: auto;
     height: 500px;
 }
+#choixAuto{
+    width: 77% !important;
+    height: 100% !important;
+}
+
+#choixManuel{
+    width: 77% !important;
+    height: 100% !important;
+}

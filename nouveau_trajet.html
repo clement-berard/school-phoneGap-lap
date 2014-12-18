@@ -43,10 +43,21 @@
         </div>
         <div data-role="content">
             <h2>Nouveau trajet</h2>
-            <ul data-role="listview" data-inset="true">
-                <li><a href="automatique.html" rel="external">Automatique</a></li>
-                <li><a href="navigationManuelle.html" rel="external">Manuel</a></li>
+            <div id="choix">
+                <ul>
+                <div id="choixAuto" class="ui-input-btn ui-btn ui-btn-inline">
+                    Automatique
+                    <input data-enhanced="true" value="Automatique" href="automatique.html" rel="external" type="button">
+                </div>
+                </ul>
+                <ul >
+                <div id="choixManuel" class="ui-input-btn ui-btn ui-btn-inline">
+                    Manuel
+                    <input data-enhanced="true" value="Manuel" href="navigationManuelle.html" rel="external" type="button">
+                </div>
             </ul>
+            </div>
+            
         </div>
 
         <script>
