@@ -69,21 +69,24 @@
 
             <script type="text/javascript">
                 function enregisterProfil(){
+                    // Création du profil à partir des informations renseignées
                     var monProfil = {
                         prenom: document.getElementById("text-prenom").value,
                         nom: document.getElementById("text-nom").value,
                         distanceTotale: document.getElementById("number-distance").value
                     };
 
+                    // Ouverture d'une pop up pour préciser que le profil est bien enregistré
                     Locstor.set('monProfil', monProfil);
                     $( "#popupBasic" ).popup( "open" );
 
-                    
+                    // Redirection vers la page des nouveaux trajets
                     setTimeout(function() {
                         window.location.href="nouveau_trajet.html";
                     }, 1000);
                 };
 
+                // Si un profil est renseigné, affichage du profil
                 $(document).on('pagebeforeshow', '#page-testTrajet', function (e, data) {
                     if (Locstor.contains('monProfil')) {
                         var monProfil = Locstor.get('monProfil');
