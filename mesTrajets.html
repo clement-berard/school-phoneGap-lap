@@ -132,7 +132,7 @@
     </div>
 
     <div data-role="content">
-        <a href="mesTrajets.html" data-role="button" class="ui-btn" rel="external">Retour à la liste</a>
+        <a href="mesTrajets.html" data-role="button" id="back" rel="external">Retour à la liste</a>
 
         <h2 id="text-titre"></h2>
 
@@ -202,6 +202,7 @@
 
                 // Création de la  carte pour afficher les etapes
                 var myMap = new fonctionMap('map_details').init();
+                google.maps.event.trigger(myMap.getMap(), 'resize');
                 // on centre la carte sur la position du depart
                 myMap.moveToLocation(myMap.getMap(), monTrajet.depart.lat, monTrajet.depart.lng);
                 // Ajout des marker de départ et d'arrivée sur la carte
@@ -213,7 +214,8 @@
                 if (taille_etapes > 1) {
                     for (var i = 1; i < taille_etapes - 1; i++) {
                         // pour chaque etapes, on rajoute un marker
-                        myMap.addMarker('arrivee', myMap.getGoogleLocation(les_etapes[i].lat, les_etapes[i].lng), 'Etape ' + i);
+                        text = 'Etape ' + i.toString();
+                        myMap.addMarker('eape'+i, myMap.getGoogleLocation(les_etapes[i].lat, les_etapes[i].lng), text );
                     }
                 }
                 // ici on va tracer des lignes entre les etapes

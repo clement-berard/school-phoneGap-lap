@@ -48,8 +48,13 @@
   background-color: grey !important; 
 }
 
-.ui-btn {
+#enregistrerTrajetBtn{
+  background-color: grey !important; 
+}
+
+#back {
     background-color: #49a5ff !important;
     border-radius: 0 !important;
     color: white !important ;
 }
+
