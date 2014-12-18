@@ -137,3 +137,14 @@ h1 {
 #wait_for_save{
     text-align: center;color: #005599
 }
+
+#choixAuto{
+    width: 77% !important;
+    height: 100% !important;
+}
+
+#choixManuel{
+    width: 77% !important;
+    height: 100% !important;
+}
+
