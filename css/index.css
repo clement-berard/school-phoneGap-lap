@@ -157,3 +157,10 @@ h1 {
     color: white;
 }
 
+#calculerDistance{
+     background-color: grey !important; 
+}
+
+#enregistrerTrajetBtn{
+    background-color: grey !important;
+}
