@@ -25,6 +25,7 @@
         <title>LAP - Nouveau trajet</title>
     </head>
     <body>
+    <!-- volet glissant -->
     <div id="menu">
     <h3>Menu</h3>
     <ul>
@@ -34,6 +35,7 @@
         <li><a href="monProfil.html" class="contentLink" rel="external">Profil </a></li>
     </ul>
 </div>
+    <!--Page de creation de nouveau trajet-->
     <div data-role="page" id="page-newtrajet">
         <div data-role="header" class="entete" data-theme="a">
         <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
@@ -48,6 +50,7 @@
         </div>
 
         <script>
+            //Si l'utilisateur n'a pas de profil on le redirige vers la page de creation des profils
             $(document).on('pagebeforeshow', '#page-newtrajet', function (e, data) {
                 // Si un profil n'a pas été renseigné
                 if (!Locstor.contains('monProfil')) {

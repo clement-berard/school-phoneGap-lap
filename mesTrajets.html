@@ -27,6 +27,7 @@
         <title>LAP - La conduite</title>
     </head>
     <body>
+        <!-- volet glissant -->
         <div id="menu">
             <h3>Menu</h3>
             <ul>
@@ -37,6 +38,7 @@
             </ul>
         </div>
 
+        <!--Page des trajets parcourus -->
         <div data-role="page" id="page-listeTrajets" >
             <div data-role="header" class="entete" data-theme="a">
                 <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
@@ -94,7 +96,6 @@
 
                         // Arrondi de la distance totale avec 2 décimales
                         valeur = Math.round(valeur*100)/100
-
                         // Définition de la valeur de la barre de progression à la distance totale parcourue
                         $('#slider-distance').val(valeur);
                         // Définition de la valeur maximale de la barre de progression à la valeur renseigné dans le profil
