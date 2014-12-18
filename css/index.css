@@ -128,12 +128,15 @@ h1 {
     margin-top: 20px;
 }
 
-#map_details{
 
-    width: 500px;
-    height: 500px;
-}
 
 #wait_for_save{
     text-align: center;color: #005599
+}
+
+#map_details{
+    display: block;
+    margin-top: 2%;
+    width: auto;
+    height: 500px;
 }

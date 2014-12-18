@@ -171,7 +171,7 @@
                         <td id="text-periode"></td>
                     </tr>
                 </table>
-                <div id="map_details" style="width: auto;height: 500px"></div>
+                <div id="map_details"></div>
             </div>
 
             <script type="text/javascript">
@@ -194,6 +194,7 @@
 
                         // Création du carte
                         var myMap = new fonctionMap('map_details').init();
+                        myMap.moveToLocation(myMap.getMap(),monTrajet.depart.lat,monTrajet.depart.lng);
                         // Ajout des marker de départ et d'arrivée sur la carte
                         myMap.addMarker('depart',myMap.getGoogleLocation(monTrajet.depart.lat,monTrajet.depart.lng),'<span style="color: red">Départ</span>');
                         myMap.addMarker('arrivee',myMap.getGoogleLocation(monTrajet.arrivee.lat,monTrajet.arrivee.lng),'<span style="color: red">Arrivée</span>');
