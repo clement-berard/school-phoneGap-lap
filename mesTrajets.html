@@ -1,237 +1,246 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/menu.css" />
-        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css" />
-        <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css" />
-        
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
-        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/urlHelper.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/main-config.js"></script>
-        <script type="text/javascript" src="js/menu.js"></script>
-        <script type="text/javascript" src="js/localhelper.js"></script>
-        <script type="text/javascript" src="js/fonctionMap.js"></script>
-        <script type="text/javascript" src="js/trajet.js"></script>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=device-dpi"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile-1.4.5.min.css"/>
+    <link rel="stylesheet" type="text/css" href="res/jquerymobile/jquery.mobile.theme-1.4.5.min.css"/>
 
-        <title>LAP - La conduite</title>
-    </head>
-    <body>
-        <!-- volet glissant -->
-        <div id="menu">
-            <h3>Menu</h3>
-            <ul>
-                <li class="active"><a href="nouveau_trajet.html" class="contentLink" rel="external">Nouveau </a></li>
-                <li><a href="mesTrajets.html" class="contentLink" rel="external">Mes Trajets </a></li>
-                <li><a href="navigation.html" class="contentLink" rel="external">Navigation </a></li>
-                <li><a href="monProfil.html" class="contentLink" rel="external">Profil </a></li>
-            </ul>
-        </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="res/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
+    <script type="text/javascript"
+            src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=false"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/urlHelper.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/main-config.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/localhelper.js"></script>
+    <script type="text/javascript" src="js/fonctionMap.js"></script>
+    <script type="text/javascript" src="js/trajet.js"></script>
 
-        <!--Page des trajets parcourus -->
-        <div data-role="page" id="page-listeTrajets" >
-            <div data-role="header" class="entete" data-theme="a">
-                <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
-                <h1>Trajets Parcourus</h1>
-            </div>
+    <title>LAP - La conduite</title>
+</head>
+<body>
+<!-- volet glissant -->
+<div id="menu">
+    <h3>Menu</h3>
+    <ul>
+        <li class="active"><a href="nouveau_trajet.html" class="contentLink" rel="external">Nouveau </a></li>
+        <li><a href="mesTrajets.html" class="contentLink" rel="external">Mes Trajets </a></li>
+        <li><a href="navigation.html" class="contentLink" rel="external">Navigation </a></li>
+        <li><a href="monProfil.html" class="contentLink" rel="external">Profil </a></li>
+    </ul>
+</div>
 
-            <div data-role="content">
-                <h2>Mes trajets</h2>
-                <ul data-role="listview" id="liste_effectuees"></ul>
+<!--Page des trajets parcourus -->
+<div data-role="page" id="page-listeTrajets">
+    <div data-role="header" class="entete" data-theme="a">
+        <a href="#" class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow"
+           data-form="ui-icon"> </a>
 
-                <form >
-                    <p name="text-distance" id="text-distance" class="ui-body ui-body-a ui-corner-all"></p>
-                    <input class="ui-body ui-body-a ui-corner-all" type="range" name="slider-distance" id="slider-distance" data-highlight="true" min="0" max="100" value="50">
-                </form>
-            </div> 
+        <h1>Trajets Parcourus</h1>
+    </div>
 
-            <script>
-                // On récupère toutes les clés présentes dans le local storage commençant par "trajet_"
+    <div data-role="content">
+        <h2>Mes trajets</h2>
+        <ul data-role="listview" id="liste_effectuees"></ul>
+
+        <form>
+            <p name="text-distance" id="text-distance" class="ui-body ui-body-a ui-corner-all"></p>
+            <input class="ui-body ui-body-a ui-corner-all" type="range" name="slider-distance" id="slider-distance"
+                   data-highlight="true" min="0" max="100" value="50">
+        </form>
+    </div>
+
+    <script>
+        // On récupère toutes les clés présentes dans le local storage commençant par "trajet_"
+        var a = Locstor.list('trajet_');
+        // Pour chacune de ces clés
+        $.each(a, function (i) {
+            // Récupération du trajet correspondant
+            var monTrajet = Locstor.get(a[i]);
+            // Récupération de la liste HTML (balise <ul>)
+            var liste_trajets = $('#liste_effectuees');
+            // Ajout d'un item a la liste
+            liste_trajets.append('<li data-name="' + a[i] + '"><a href="#page-detailsTrajet" data-icon="custom">' + monTrajet.titre + '</a></li>')
+
+        });
+
+        // Lors du clic sur un des élements de la liste des trajets on sauvegarde dans le local storage
+        // la clé du trajet cliqué
+        $('ul').children('li').on('click', function () {
+            Locstor.set('courant_trajet', $(this).attr('data-name'));
+        });
+
+        // Exécuté avant d'afficher la page de la liste des trajets
+        $(document).on('pagebeforeshow', '#page-listeTrajets', function (e, data) {
+            // Si un profil a déjà été renseigné
+            if (Locstor.contains('monProfil')) {
+                // Récupération du profil courant
+                var monProfil = Locstor.get('monProfil');
+                // Initialisation de la variable contenant la distance totale déjà parcourue
+                var valeur = 0;
+
+                // Récupération de toutes les clés présentes dans le local storage commençant par "trajet_"
                 var a = Locstor.list('trajet_');
                 // Pour chacune de ces clés
                 $.each(a, function (i) {
                     // Récupération du trajet correspondant
-                    var monTrajet = Locstor.get(a[i]);
-                    // Récupération de la liste HTML (balise <ul>)
-                    var liste_trajets = $('#liste_effectuees');
-                    // Ajout d'un item a la liste
-                    liste_trajets.append('<li data-name="'+a[i]+'"><a href="#page-detailsTrajet" data-icon="custom">'+monTrajet.titre+'</a></li>')
-
+                    var trajet = Locstor.get(a[i]);
+                    // Ajout de la distance parcourue lors de ce trajet à la distance totale
+                    valeur = valeur + trajet.distanceTotal;
                 });
 
-                // Lors du clic sur un des élements de la liste des trajets on sauvegarde dans le local storage
-                // la clé du trajet cliqué
-                $('ul').children('li').on('click', function () {
-                    Locstor.set('courant_trajet', $(this).attr('data-name'));
-                });
+                // Arrondi de la distance totale avec 2 décimales
+                valeur = Math.round(valeur * 100) / 100
+                // Définition de la valeur de la barre de progression à la distance totale parcourue
+                $('#slider-distance').val(valeur);
+                // Définition de la valeur maximale de la barre de progression à la valeur renseigné dans le profil
+                $("#slider-distance").attr("max", monProfil.distanceTotale);
+                // Affichage de la distance parcourus, de la distance à parcourir et du pourcentage réalisé
+                $('#text-distance').html("Distance totale parcourue : <br />" + valeur + " km sur " + monProfil.distanceTotale + " km (" + Math.round((valeur * 100 / monProfil.distanceTotale) * 100) / 100 + " %)");
+                // Mise à jour de la barre de progression pour afficher les valeurs renseignées
+                $('#slider-distance').slider("refresh");
 
-                // Exécuté avant d'afficher la page de la liste des trajets
-                $(document).on('pagebeforeshow', '#page-listeTrajets', function (e, data) {
-                    // Si un profil a déjà été renseigné
-                    if (Locstor.contains('monProfil')) {
-                        // Récupération du profil courant
-                        var monProfil = Locstor.get('monProfil');
-                        // Initialisation de la variable contenant la distance totale déjà parcourue
-                        var valeur = 0;
+                // Modification du slider pour qu'il ressemble à une barre de progression
+                $("input").remove();
+                $(".ui-slider-handle").remove();
+                $('.ui-slider-track').css('margin', '0 0 0 0').css('pointer-events', 'none');
+            }
+            else {
+                // Si aucun profil n'est renseigné, redirection vers la page de création du profil
+                window.location.href = "monProfil.html";
+            }
+        });
+    </script>
+</div>
 
-                        // Récupération de toutes les clés présentes dans le local storage commençant par "trajet_"
-                        var a = Locstor.list('trajet_');
-                        // Pour chacune de ces clés
-                        $.each(a, function (i) {
-                            // Récupération du trajet correspondant
-                            var trajet = Locstor.get(a[i]);
-                            // Ajout de la distance parcourue lors de ce trajet à la distance totale
-                            valeur = valeur + trajet.distanceTotal;
-                        });
+<div data-role="page" id="page-detailsTrajet">
+    <div data-role="header" class="entete" data-theme="a">
+        <a href="#" class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow"
+           data-form="ui-icon"> </a>
 
-                        // Arrondi de la distance totale avec 2 décimales
-                        valeur = Math.round(valeur*100)/100
-                        // Définition de la valeur de la barre de progression à la distance totale parcourue
-                        $('#slider-distance').val(valeur);
-                        // Définition de la valeur maximale de la barre de progression à la valeur renseigné dans le profil
-                        $("#slider-distance").attr("max", monProfil.distanceTotale);
-                        // Affichage de la distance parcourus, de la distance à parcourir et du pourcentage réalisé
-                        $('#text-distance').html("Distance totale parcourue : <br />"+valeur+" km sur "+monProfil.distanceTotale+" km ("+Math.round((valeur*100/monProfil.distanceTotale)*100)/100+" %)");
-                        // Mise à jour de la barre de progression pour afficher les valeurs renseignées
-                        $('#slider-distance').slider("refresh");
-                        
-                        // Modification du slider pour qu'il ressemble à une barre de progression
-                        $("input").remove();
-                        $(".ui-slider-handle").remove();
-                        $('.ui-slider-track').css('margin','0 0 0 0').css('pointer-events','none');
+        <h1>Détails de mon trajet</h1>
+    </div>
+
+    <div data-role="content">
+        <a href="mesTrajets.html" data-role="button" class="ui-btn ui-corner-all" rel="external">Retour à la liste</a>
+
+        <h2 id="text-titre"></h2>
+
+        <table class="ui-li-divider ui-bar-a ui-first-child">
+            <tr class="ui-body ui-body-a ui-corner-all">
+
+                <td>Départ:</td>
+                <td id="text-depart"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Arrivée:</td>
+                <td id="text-arrivee"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Distance:</td>
+                <td id="text-km"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Temps:</td>
+                <td id="text-temps"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Vitesse moyenne:</td>
+                <td id="text-vitesse"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Météo:</td>
+                <td id="text-meteo"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Type de route:</td>
+                <td id="text-route"></td>
+            </tr>
+
+            <tr class="ui-body ui-body-a ui-corner-all">
+                <td>Période:</td>
+                <td id="text-periode"></td>
+            </tr>
+        </table>
+        <div id="map_details"></div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {
+            // si un trajet à afficher est bien renseigné dans le local storage
+            if (Locstor.contains(Locstor.get('courant_trajet'))) {
+
+                // Récupération du trajet à afficher à partir du local storage
+                var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
+                // Affichage des informations du trajet
+                $('#text-titre').html(monTrajet.titre);
+                $('#text-depart').html("Lattitude : " + monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
+                $('#text-arrivee').html("Lattitude : " + monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
+                $('#text-km').html(Math.round(monTrajet.distanceTotal * 100) / 100 + ' km');
+                $('#text-temps').html(monTrajet.tempsTotal + ' min');
+                $('#text-vitesse').html(Math.round(monTrajet.vitesseMoyenne * 100) / 100 + ' km/h');
+                $('#text-meteo').html(monTrajet.meteo);
+                $('#text-route').html(monTrajet.typeRoute);
+                $('#text-periode').html(monTrajet.periode);
+
+                // Création de la  carte pour afficher les etapes
+                var myMap = new fonctionMap('map_details').init();
+                // on centre la carte sur la position du depart
+                myMap.moveToLocation(myMap.getMap(), monTrajet.depart.lat, monTrajet.depart.lng);
+                // Ajout des marker de départ et d'arrivée sur la carte
+                myMap.addMarker('depart', myMap.getGoogleLocation(monTrajet.depart.lat, monTrajet.depart.lng), '<span style="color: red">Départ</span>');
+                myMap.addMarker('arrivee', myMap.getGoogleLocation(monTrajet.arrivee.lat, monTrajet.arrivee.lng), '<span style="color: red">Arrivée</span>');
+                // Récupération des étapes du trajet
+                var les_etapes = monTrajet.etapes;
+                var taille_etapes = Object.keys(les_etapes).length;
+                if (taille_etapes > 1) {
+                    for (var i = 1; i < taille_etapes - 1; i++) {
+                        // pour chaque etapes, on rajoute un marker
+                        myMap.addMarker('arrivee', myMap.getGoogleLocation(les_etapes[i].lat, les_etapes[i].lng), 'Etape ' + i);
                     }
-                    else {
-                        // Si aucun profil n'est renseigné, redirection vers la page de création du profil
-                        window.location.href="monProfil.html";
-                    } 
-                });
-            </script>
-        </div>
+                }
+                // ici on va tracer des lignes entre les etapes
+                var tableauPointsPolyline = [];
+                // pour toutes les etapes...
+                for (var j = 0; j < taille_etapes; j++) {
+                    // on rajoute les coordonnees dans un tableau
+                    tableauPointsPolyline[j] = myMap.getGoogleLocation(les_etapes[j].lat, les_etapes[j].lng);
+                }
+                // on configure les options pour les lignes
+                var optionsPolyline = {
+                    map: myMap.getMap(),
+                    path: tableauPointsPolyline
+                };
+                // et on les affiche
+                var maPolyline = new google.maps.Polyline(optionsPolyline);
 
-        <div data-role="page" id="page-detailsTrajet" >
-            <div data-role="header" class="entete" data-theme="a">
-                <a href="#"class="showMenu ui-btn-left ui-btn-corner-all ui-btn ui-icon-home ui-btn-icon-notext ui-shadow" data-form="ui-icon"> </a>
-                <h1>Détails de mon trajet</h1>
-            </div>
+            }
+            else {
+                alert("Clé inconnue : " + Locstor.get('courant_trajet'));
+            }
+        });
+    </script>
+</div>
 
-            <div data-role="content">
-                <a href="mesTrajets.html" data-role="button" class="ui-btn ui-corner-all" rel="external">Retour à la liste</a>
-
-                <h2 id="text-titre"></h2>
-
-                <table class="ui-li-divider ui-bar-a ui-first-child">
-                    <tr class="ui-body ui-body-a ui-corner-all">
-
-                        <td>Départ:</td>
-                        <td id="text-depart"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                       <td>Arrivée:</td>
-                        <td id="text-arrivee"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Distance:</td>
-                        <td id="text-km"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Temps:</td>
-                        <td id="text-temps"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Vitesse moyenne:</td>
-                        <td id="text-vitesse"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Météo:</td>
-                        <td id="text-meteo"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Type de route:</td>
-                        <td id="text-route"></td>
-                    </tr>
-
-                    <tr class="ui-body ui-body-a ui-corner-all">
-                        <td>Période:</td>
-                        <td id="text-periode"></td>
-                    </tr>
-                </table>
-                <div id="map_details" style="width: auto;height: 500px"></div>
-            </div>
-
-            <script type="text/javascript">
-                $(document).on('pagebeforeshow', '#page-detailsTrajet', function (e, data) {     
-                    // si un trajet à afficher est bien renseigné dans le local storage               
-                    if (Locstor.contains(Locstor.get('courant_trajet'))) {
-
-                        // Récupération du trajet à afficher à partir du local storage
-                        var monTrajet = Locstor.get(Locstor.get('courant_trajet'));
-                        // Affichage des informations du trajet
-                        $('#text-titre').html(monTrajet.titre);
-                        $('#text-depart').html("Lattitude : "+monTrajet.depart.lat + " Longitude : " + monTrajet.depart.lng);
-                        $('#text-arrivee').html("Lattitude : "+monTrajet.arrivee.lat + " Longitude : " + monTrajet.arrivee.lng);
-                        $('#text-km').html(Math.round(monTrajet.distanceTotal*100)/100+' km');
-                        $('#text-temps').html(monTrajet.tempsTotal+' min');
-                        $('#text-vitesse').html(Math.round(monTrajet.vitesseMoyenne*100)/100+' km/h');
-                        $('#text-meteo').html(monTrajet.meteo);
-                        $('#text-route').html(monTrajet.typeRoute);
-                        $('#text-periode').html(monTrajet.periode);
-
-                        // Création du carte
-                        var myMap = new fonctionMap('map_details').init();
-                        // Ajout des marker de départ et d'arrivée sur la carte
-                        myMap.addMarker('depart',myMap.getGoogleLocation(monTrajet.depart.lat,monTrajet.depart.lng),'<span style="color: red">Départ</span>');
-                        myMap.addMarker('arrivee',myMap.getGoogleLocation(monTrajet.arrivee.lat,monTrajet.arrivee.lng),'<span style="color: red">Arrivée</span>');
-                        // Récupération des étapes du trajet
-                        var les_etapes =  monTrajet.etapes;
-                        var taille_etapes = Object.keys(les_etapes).length;
-                        if(taille_etapes > 1){
-                            for (var i = 1; i < taille_etapes-1; i++) {
-                                myMap.addMarker('arrivee',myMap.getGoogleLocation(les_etapes[i].lat,les_etapes[i].lng),'Etape '+i);
-                            }
-                        }
-
-                        var tableauPointsPolyline = [];
-
-                        for (var j = 0; j < taille_etapes; j++) {
-                            tableauPointsPolyline[j] = myMap.getGoogleLocation(les_etapes[j].lat,les_etapes[j].lng);
-                        }
-
-                        var optionsPolyline = {
-                            map: myMap.getMap(),
-                            path: tableauPointsPolyline
-                        };
-
-                        var maPolyline = new google.maps.Polyline(optionsPolyline);
-
-
-
-                    } 
-                    else {
-                        alert("Clé inconnue : "+Locstor.get('courant_trajet'));
-                    }                    
-                });
-            </script>
-        </div>
-
-        <script type="text/javascript">
-            // pour initialiser l'app
-            app.initialize();
-        </script>
-    </body>
+<script type="text/javascript">
+    // pour initialiser l'app
+    app.initialize();
+</script>
+</body>
 </html>
